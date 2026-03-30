@@ -31,15 +31,11 @@ import { Collection, Area } from '$rime/config';
 import { text, toggle } from 'rimecms/fields';
 
 const Settings = Area.create('settings', {
-  fields: [
-    toggle('maintenance')
-  ]
+	fields: [toggle('maintenance')]
 });
 
 const Pages = Collection.create('pages', {
-  fields: [
-    text('title').isTitle().required()
-  ]
+	fields: [text('title').isTitle().required()]
 });
 ```
 
@@ -50,167 +46,177 @@ const Pages = Collection.create('pages', {
 ## Properties
 
 ### $adapter {!required!}
+
 The database adapter with as param the name of the database located in ./db.
 
 ```ts
 export default rime({
-  $adapter: sqliteAdapter('my-app.sqlite')
+	$adapter: sqliteAdapter('my-app.sqlite')
 });
 ```
 
 ### $smtp
+
 Smtp configuration to enable the rime.mailer core plugin and Better-Auth email features.
 
 ```ts
 export default rime({
-  //...
-  $smtp: {
-    from: process.env.RIME_SMTP_USER,
+	//...
+	$smtp: {
+		from: process.env.RIME_SMTP_USER,
 		host: process.env.RIME_SMTP_HOST,
 		port: parseInt(process.env.RIME_SMTP_PORT || '465'),
 		auth: {
 			user: process.env.RIME_SMTP_USER,
 			password: process.env.RIME_SMTP_PASSWORD
 		}
-  }
+	}
 });
 ```
 
 ### $auth
+
 Additional better-auth configuration, currently only adding server plugins is supported.
 
 ```ts
-import { magicLink } from "better-auth/plugins";
+import { magicLink } from 'better-auth/plugins';
 
 export default rime({
-  //...
-  $auth: {
-    plugins: [
-      magicLink({
-        sendMagicLink: async ({ email, token, url }, request) => {
-          const event = getRequestEvent()
-          event.rime.mailer.sendMail({ // (Require $stmp config to be set)
-            to: email,
-        		subject: 'Sign-in',
-        		text: `Your sign-in link ${url}`,
-          })
-        }
-      })
-    ]
-  }
+	//...
+	$auth: {
+		plugins: [
+			magicLink({
+				sendMagicLink: async ({ email, token, url }, request) => {
+					const event = getRequestEvent();
+					event.rime.mailer.sendMail({
+						// (Require $stmp config to be set)
+						to: email,
+						subject: 'Sign-in',
+						text: `Your sign-in link ${url}`
+					});
+				}
+			})
+		]
+	}
 });
 ```
 
 ### $trustedOrigins
+
 Which hosts are allowed to query the API. This property is also forwarded to the Better-Auth config.
 
 ```ts
 export default rime({
-  //...
-  $trustedOrigins: [ process.env.PUBLIC_RIME_URL ] // Default
+	//...
+	$trustedOrigins: [process.env.PUBLIC_RIME_URL] // Default
 });
 ```
 
 ### $cache
-API cache configuration. Only GET requests from non-panel routes are cached. Default to false when user not signed-in.
+
+API cache configuration. Only GET requests from non-panel routes are cached. Default to false when user signed-in.
 
 ```ts
 export default rime({
-  //...
-  $cache: {
-    isEnabled: (event: RequestEvent) => !event.locals.user // default
-  }
+	//...
+	$cache: {
+		isEnabled: (event: RequestEvent) => !event.locals.user // default
+	}
 });
 ```
 
-> [!INFO] Note that RIME_CACHE_ENABLED env variable has a higher priority than the `$cache.isEnabled` function.
+> [!INFO] Note that `RIME_CACHE_ENABLED` env variable will enable/disable the functionnality, so `$cache.isEnabled` may be ignored if `RIME_CACHE_ENABLED` is `false`.
 
 ### $routes
+
 Custom API routes definition. `GET`, `POST`, `PATCH`, `DELETE` are supported.
 
 ```ts
 export default rime({
-  //...
-  $routes: {
-    '/api/custom-route': {
-      GET: async (event: RequestEvent) => json({ custom: true })
-    }
-  }
+	//...
+	$routes: {
+		'/api/custom-route': {
+			GET: async (event: RequestEvent) => json({ custom: true })
+		}
+	}
 });
 ```
 
 ### $custom
+
 Custom object passed to the server-only config.
 
 ```ts
 export default rime({
-  //...
-  $custom: {
-    'API_KEY': '12345'
-  }
+	//...
+	$custom: {
+		API_KEY: '12345'
+	}
 });
 // Which you can retrieve than with : rime.config.raw.$custom.API_KEY
 ```
 
 ### siteUrl
-When defined, a preview button will be added on the panel dashboard header, pointing to this url.
-Exemple if your front-end is located somewhere else than your backend.
+
+When defined, a preview button will be added on the panel dashboard header, pointing to this url. Exemple if your front-end is located somewhere else than your backend.
 
 ```ts
 export default rime({
-  //...
-  siteUrl: 'https://www.my-front-end.com'
+	//...
+	siteUrl: 'https://www.my-front-end.com'
 });
 ```
 
 ### collections
+
 List of collection documents configuration. [More](/docs/03-01-configuration__collections.md)
 
 ### areas
+
 List of areas documents configuration. [More](/docs/03-02-configuration__areas.md)
 
 ### localization
+
 Define available locales for your content. [More](/docs/03-04-configuration__areas.md)
 
 ### staff
+
 Additional config for panel users collections. // @TODO add full configuration page
 
 ```ts
 export default rime({
-  //...
-  staff: {
-    roles: ['editor', { label: 'SEO manager', value: 'seo' }],
-    fields: [
-      text('website')
-    ]
-  }
+	//...
+	staff: {
+		roles: ['editor', { label: 'SEO manager', value: 'seo' }],
+		fields: [text('website')]
+	}
 });
 ```
 
 ### panel
+
 Panel access options and specific properties. // @TODO add full configuration page
 
 ```ts
 export default rime({
-  //...
-  panel: {
-    $access: (user) => !!user && user.roles.includes('admin'),
-    fields: [
-      text('website')
-    ],
-    css: '/panel/custom.css'
-  }
+	//...
+	panel: {
+		$access: (user) => !!user && user.roles.includes('admin'),
+		fields: [text('website')],
+		css: '/panel/custom.css'
+	}
 });
 ```
 
 ### custom
+
 Custom config available server-side and client-side (for example in a custom fields).
 
 ```ts
 export default rime({
-  //...
-  custom: {
-    colorList: ['orange', 'blue']
-  }
+	//...
+	custom: {
+		colorList: ['orange', 'blue']
+	}
 });
 ```

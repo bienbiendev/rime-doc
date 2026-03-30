@@ -1,6 +1,6 @@
 import 'rimecms';
 import type { Session } from 'better-auth';
-import type { BaseDoc, Navigation, User } from 'rimecms/types'
+import type { BaseDoc, Navigation, User, UploadDoc } from 'rimecms/types'
 
 
 export type RelationValue<T> =
@@ -32,6 +32,28 @@ export type PagesDoc = BaseDoc &  {
 	_position?: number
 	url?: string
 	editedBy?: string
+	createdAt?: Date
+	updatedAt?: Date;
+	[x: string]: unknown;
+}
+
+export type MediasDoc = BaseDoc & UploadDoc &  {
+  alt: string
+	mimeType?: string
+	filename?: string
+	filesize?: string
+	_path?: string
+	editedBy?: string
+	createdAt?: Date
+	updatedAt?: Date
+		sizes:{thumbnail: string};
+	[x: string]: unknown;
+}
+
+export type Medias_directoriesDoc = BaseDoc &  {
+  id: string
+	name?: string
+	parent?: string
 	createdAt?: Date
 	updatedAt?: Date;
 	[x: string]: unknown;
@@ -117,7 +139,9 @@ declare global {
 declare module 'rimecms' {
 	interface RegisterCollection {
 		'staff': StaffDoc
-		'pages': PagesDoc;
+		'pages': PagesDoc
+		'medias': MediasDoc
+		'medias_directories': Medias_directoriesDoc;
 	}
 	interface RegisterArea {
 		'nav': NavDoc;

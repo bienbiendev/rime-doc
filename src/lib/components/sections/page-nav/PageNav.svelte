@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { richTextJSONToText } from 'rimecms/fields/rich-text';
-	import { string as str } from 'rimecms/util';
 	import { TableOfContents } from '@lucide/svelte';
 	import type { JSONContent } from '@tiptap/core';
+	import { richTextJSONToText } from 'rimecms/fields/rich-text';
+	import { string as str } from 'rimecms/util';
 
 	type Props = { pageTitle: string; text: JSONContent | undefined };
 	type HeadingNode = {
@@ -47,7 +47,6 @@
 			}
 		}
 		let first = Array.from(elements || []).find((element) => visibleElements.has(element));
-		console.log(first);
 
 		if (!first) return;
 		activeId = first.id;

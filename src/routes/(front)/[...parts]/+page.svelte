@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Home from '$lib/pages/Home.svelte';
-	import Page from '$lib/pages/Page.svelte';
+	import Home from '$lib/components/pages/home/Home.svelte';
+	import Page from '$lib/components/pages/Page.svelte';
 	import type { PageData } from './$types';
 
 	type Props = { data: PageData };

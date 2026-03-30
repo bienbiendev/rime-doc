@@ -138,7 +138,8 @@ function scanDir(dir: string): Set<FileEntry> {
 			});
 		}
 	}
-	return files;
+	return new Set(Array.from(files).sort((a, b) => a.path.localeCompare(b.path)));
+	// return files;
 }
 
 /**
@@ -240,7 +241,7 @@ async function updatePage(file: FileEntry, id: string): Promise<PagesDoc> {
 		throw new Error(`Error with ${file.uri}`);
 	}
 
-	console.log(`[√] /${file.uri} updated`);
+	console.log(`[√] /${file.uri} (${id}) updated`);
 	const { doc } = await response.json();
 	return doc;
 }
@@ -255,6 +256,7 @@ export const feed = async (): Promise<void> => {
 		// First pass: check existing pages and create missing ones
 		for (const file of Array.from(files)) {
 			const docUrl = `${process.env.PUBLIC_RIME_URL}/docs/${file.uri}`;
+
 			const response = await fetch(
 				`${process.env.PUBLIC_RIME_URL}/api/pages?where[url][equals]=${encodeURIComponent(docUrl)}`,
 				{
@@ -327,10 +329,13 @@ export const feed = async (): Promise<void> => {
 			};
 		}
 
+		console.log('Building nav...');
 		for (const [index, file] of Array.from(files).filter(isOrphean).entries()) {
 			const doc = getDocByURI(file.uri);
 
 			if (file.isParent) {
+				console.log('doc.title', doc.title);
+				console.log('index', index);
 				const children = (parentMap[file.slug] || []).sort((a, b) => a.slug.localeCompare(b.slug));
 				const overview: MainNavItem = {
 					label: 'Overview',

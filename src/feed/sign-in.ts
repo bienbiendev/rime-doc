@@ -6,7 +6,6 @@
  */
 export const signIn = async (email: string, password: string): Promise<Headers> => {
 	const headers = new Headers();
-	headers.set('host', process.env.PUBLIC_RIME_URL || 'http://localhost:5173');
 	headers.set('content-type', 'application/json');
 
 	const response = await fetch(`${process.env.PUBLIC_RIME_URL}/api/auth/sign-in/email`, {
@@ -18,8 +17,12 @@ export const signIn = async (email: string, password: string): Promise<Headers> 
 		})
 	});
 
-	const setCookie = response.headers.get('set-cookie') || 'better-auth=foo';
-	const [name, cookie] = setCookie.split('=');
+	const authCookie = response.headers.get('set-cookie');
+	if (!authCookie) {
+		throw new Error('No cookie set on sign-in');
+	}
+
+	const [name, cookie] = authCookie.split('=');
 	headers.set('Cookie', `${name}=${cookie}`);
 
 	return headers;

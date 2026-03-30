@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { highlightCode } from '$lib/code-highlight/highlighter.js';
 	import ButtonCopy from '$lib/components/ui/button-copy/ButtonCopy.svelte';
+	import { highlightCode } from '$lib/rich-text-features/code-feature/highlighter/highlighter.js';
 
 	type Props = { node: any };
 	const { node }: Props = $props();

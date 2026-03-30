@@ -50,9 +50,9 @@
 		--button-border-radius: var(--border-radius, var(--size-6));
 	}
 	.button {
-		--internal-px: var(--px, var(--size-4));
-		--internal-color: var(--color, unset);
-		--internal-font-size: var(--font-size, var(--text-base));
+		--local-space-inline: var(--space-inline, var(--size-4));
+		--local-color: var(--color, unset);
+		--local-font-size: var(--font-size, var(--text-fluid-md));
 		flex-shrink: var(--flex-shrink, unset);
 		display: inline-flex;
 		align-items: center;
@@ -63,9 +63,10 @@
 			box-shadow, color, background-color, border-color, text-decoration-color, fill, stroke;
 		transition-duration: 0.25s;
 		gap: var(--size-2);
-		font-size: var(--internal-font-size);
+		font-size: var(--local-font-size);
 		position: relative;
-		color: var(--internal-color);
+		color: var(--local-color);
+		font-variation-settings: 'wght' 600;
 	}
 
 	.button:focus-visible {
@@ -86,29 +87,29 @@
 
 	.button--size-default {
 		height: var(--size-9);
-		padding: var(--size-2) var(--internal-px);
+		padding: var(--size-2) var(--local-space-inline);
 	}
 
 	.button--size-sm {
 		border-radius: var(--button-border-radius, var(--size-8));
-		--internal-px: var(--px, var(--size-3));
+		--local-space-inline: var(--space-inline, var(--size-3));
 		height: var(--size-8);
-		padding: var(--size-2) var(--internal-px);
-		font-size: var(--internal-font-size, var(--text-sm));
+		padding: var(--size-2) var(--local-space-inline);
+		font-size: var(--local-font-size, var(--text-sm));
 	}
 
 	.button--size-lg {
 		--button-border-radius: var(--border-radius, var(--size-2));
-		--internal-px: var(--px, var(--size-8));
+		--local-space-inline: var(--space-inline, var(--size-8));
 		height: var(--size-12);
-		padding: var(--size-2) var(--internal-px);
+		padding: var(--size-2) var(--local-space-inline);
 	}
 
 	.button--size-xl {
 		--button-border-radius: var(--border-radius, var(--size-8));
-		--internal-px: var(--px, var(--size-8));
+		--local-space-inline: var(--space-inline, var(--size-8));
 		height: var(--size-14);
-		padding: var(--size-2) var(--internal-px);
+		padding: var(--size-2) var(--local-space-inline);
 	}
 
 	.button--size-icon {
@@ -129,13 +130,6 @@
 			width: 100%;
 			height: 100%;
 		}
-	}
-
-	/**************************************/
-	/* Spot
-	/**************************************/
-
-	.button--spot {
 	}
 
 	/**************************************/

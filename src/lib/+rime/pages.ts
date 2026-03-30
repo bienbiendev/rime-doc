@@ -6,11 +6,12 @@ import { tagWarnMarkFeature } from '$lib/rich-text-features/tag-warn/tag-warn-fe
 import { tagMarkFeature } from '$lib/rich-text-features/tag/tag-feature';
 import { warnBlockFeature } from '$lib/rich-text-features/warn-feature/warn-feature';
 import { Collection, Hooks } from '$rime/config';
-import { richText, slug, tab, tabs, text, textarea, toggle } from 'rimecms/fields';
+import { relation, richText, slug, tab, tabs, text, textarea, toggle } from 'rimecms/fields';
 import {
 	blockquote,
 	bold,
 	bulletList,
+	fields,
 	heading,
 	hr,
 	link,
@@ -67,6 +68,11 @@ export const pages = Collection.create('pages', {
 							link({ resources: [{ slug: 'pages' }] }),
 							hr(),
 							orederedList(),
+							fields({
+								name: 'text-image',
+								label: 'Text & Image',
+								fields: [text('title'), text('text'), relation('image').to('medias')]
+							}),
 							bulletList(),
 							codeBlockFeature,
 							codeFeature,

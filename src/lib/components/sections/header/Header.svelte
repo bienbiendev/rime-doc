@@ -56,7 +56,7 @@
 		</DropdownMenu.Root>
 	</div>
 
-	<!-- <div class="header__bg"></div> -->
+	<div class="header__bg"></div>
 </header>
 
 <style>
@@ -77,9 +77,13 @@
 	}
 	.header--border {
 		border-bottom: 1px solid var(--color-border);
+		.header__bg {
+			display: block;
+		}
 	}
 
 	.header__bg {
+		display: none;
 		position: absolute;
 		z-index: -1;
 		inset: 0;
@@ -89,7 +93,7 @@
 			/*hsl(from var(--color-bg) h s l) 50%,*/ hsl(from var(--color-bg) h s l / 0) 100%
 		);
 		background-image: var(--gradient);
-		backdrop-filter: blur(8px);
+		backdrop-filter: blur(6px);
 	}
 
 	.header__left {
