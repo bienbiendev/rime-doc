@@ -30,11 +30,15 @@ export const tableRenderer = {
 
 		const [whole, matchHead, matchRows] = group;
 
+		function splitTableLine(line: string) {
+			return line
+				.split(/(?<!\\)\|/)
+				.map((cell) => cell.trim().replace(/\\\|/g, '|'))
+				.filter((cell) => cell);
+		}
+
 		// filter out empty strings and trim each part
-		const head = matchHead
-			.split('|')
-			.map((cell) => cell.trim())
-			.filter((cell) => cell);
+		const head = splitTableLine(matchHead);
 		// split by newlines first, then process each row
 		const rows = matchRows.trim().split('\n');
 
@@ -63,10 +67,7 @@ export const tableRenderer = {
 		}
 
 		for (const row of rows) {
-			const cells = row
-				.split('|')
-				.map((cell) => cell.trim())
-				.filter((cell) => cell);
+			const cells = splitTableLine(row);
 
 			const cellsNodes: any[] = [];
 			for (const cell of cells) {

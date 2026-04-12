@@ -1,6 +1,6 @@
-import type { RichTextFeature, RichTextFeatureMark } from 'rimecms/types';
 import { ShieldQuestion } from '@lucide/svelte';
 import { Mark, mergeAttributes } from '@tiptap/core';
+import type { RichTextFeature, RichTextFeatureMark } from 'rimecms/types';
 import './tag-feature.css';
 
 declare module '@tiptap/core' {

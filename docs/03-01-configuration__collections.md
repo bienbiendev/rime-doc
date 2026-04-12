@@ -7,8 +7,9 @@ import { bold, link } from 'rimecms/fields/rich-text';
 
 const Posts = Collection.create('posts', {
   fields: [
+    //
     text('title').isTitle().required(),
-    richText('content').features(bold(), link())
+    richText('content')
   ]
 });
 ```
@@ -18,9 +19,11 @@ The slug that is passed as the first argument of `Collection.create` must be uni
 ## Properties
 
 ### $url {{server-only}}
+
 A function that get the document as argument and return a string. When set this will generate a url property on documents.
 
 ### $hooks {{server-only}}
+
 User defined hooks for operations fine grained control. [More](/docs/03-05-configuration__hooks.md)
 
 ```ts
@@ -31,9 +34,9 @@ const Posts = Collection.create('posts', {
   $hooks: {
     beforeRead: [
       Hooks.beforeRead<'posts'>(async (args) => {
-        const doc = args.doc
+        const doc = args.doc;
         // Do what you want with the document
-        return { ...args, doc }
+        return { ...args, doc };
       })
     ]
   }
@@ -41,6 +44,7 @@ const Posts = Collection.create('posts', {
 ```
 
 ### access
+
 Access rules for the collection.
 
 ```ts
@@ -52,12 +56,13 @@ const Posts = Collection.create('posts', {
     create: (user) => !!user && user.isStaff,
     read: (user) => !!user && user.isStaff,
     update: (user) => !!user && user.isStaff,
-    delete: (user) => !!user && user.isStaff,
+    delete: (user) => !!user && user.isStaff
   }
 });
 ```
 
 ### auth
+
 Authentication configuration. More
 
 ```ts
@@ -69,25 +74,33 @@ const Users = Collection.create('users', {
 ```
 
 ### fields {!required!}
+
 Collection fields definition [More](/docs/04-00-fields.md)
 
 ### icon
+
 The collection icon used inside the panel. Either a @lucide/svelte icon or a custom component with similar props.
 
 ### label
+
 The collection label.
 
 ### live
+
 Whether a document from the collection can be live edited. This require the `url` property to be defined.
 
 ### nested
+
 Whether the collection has the nested feature enable. When enabled documents can have children and/or parent, this also enable tree reordering on the collection panel page.
 
 ### panel
+
 Panel configuration : `panel.group` defines the navigation group, `panel.description` the description on the dashboard.
 
 ### upload
+
 When enabled, a collection document will have a file upload feature.
 
 ### versions
+
 Document version configuration.

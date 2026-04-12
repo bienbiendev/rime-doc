@@ -4,10 +4,10 @@ Rime provides various hooks that allow you to control operations throughout your
 
 ```ts
 const pagesBeforeUpdate = Hooks.beforeUpdate<'pages'>((args) => {
-	if (args.params.id === 'some-id') {
-		args.data.title = 'OMG a mutation';
-	}
-	return args;
+  if (args.params.id === 'some-id') {
+    args.data.title = 'OMG a mutation';
+  }
+  return args;
 });
 ```
 
@@ -30,16 +30,16 @@ The `beforeOperation` hook is a special hook that's shared by both collections a
 import { Collection, Hooks } from '$rime/config';
 
 const Posts = Collection.create('posts', {
-	//...
-	$hooks: {
-		beforeOperation: [
-			Hooks.beforeOperation(async (args) => {
-				const { event } = args;
-				event.locals.brew = new Brew();
-				return { ...args, event };
-			})
-		]
-	}
+  //...
+  $hooks: {
+    beforeOperation: [
+      Hooks.beforeOperation(async (args) => {
+        const { event } = args;
+        event.locals.brew = new Brew();
+        return { ...args, event };
+      })
+    ]
+  }
 });
 ```
 
@@ -60,18 +60,18 @@ Areas support these specific hooks: `beforeRead`, `beforeUpdate`, and `afterUpda
 import { Area } from '$rime/config';
 
 const Settings = Area.create('settings', {
-	//...
-	$hooks: {
-		beforeRead: [
-			/** */
-		],
-		beforeUpdate: [
-			/** */
-		],
-		afterUpdate: [
-			/** */
-		]
-	}
+  //...
+  $hooks: {
+    beforeRead: [
+      /** */
+    ],
+    beforeUpdate: [
+      /** */
+    ],
+    afterUpdate: [
+      /** */
+    ]
+  }
 });
 ```
 
@@ -83,17 +83,17 @@ Collections support a comprehensive set of hooks: `beforeOperation`, `beforeCrea
 import { Collection, Hooks } from '$rime/config';
 
 const Posts = Collection.create('posts', {
-	//...
-	$hooks: {
-		beforeOperation: [],
-		beforeCreate: [],
-		beforeRead: [],
-		beforeUpdate: [],
-		beforeDelete: [],
-		afterCreate: [],
-		afterUpdate: [],
-		afterDelete: []
-	}
+  //...
+  $hooks: {
+    beforeOperation: [],
+    beforeCreate: [],
+    beforeRead: [],
+    beforeUpdate: [],
+    beforeDelete: [],
+    afterCreate: [],
+    afterUpdate: [],
+    afterDelete: []
+  }
 });
 ```
 

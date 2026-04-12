@@ -1,7 +1,7 @@
-import type { RichTextFeature, RichTextFeatureNode } from 'rimecms/types';
 import { Info } from '@lucide/svelte';
 import { mergeAttributes } from '@tiptap/core';
 import Blockquote from '@tiptap/extension-blockquote';
+import type { RichTextFeature, RichTextFeatureNode } from 'rimecms/types';
 import './info-feature.css';
 
 declare module '@tiptap/core' {
@@ -27,31 +27,26 @@ const InfoBlock = import.meta.env.SSR
 	? undefined
 	: Blockquote.extend({
 			name: 'infoBlock',
-			// @ts-expect-error https://github.com/ueberdosis/tiptap/issues/6670
 			renderHTML({ HTMLAttributes }) {
 				return ['blockquote', mergeAttributes(HTMLAttributes, { 'data-type': 'info' }), 0];
 			},
 			addAttributes() {
-				// @ts-expect-error https://github.com/ueberdosis/tiptap/issues/6670
 				return { ...this.parent?.(), dataType: { default: 'info' } };
 			},
 			addCommands() {
 				return {
 					setInfoBlock:
 						() =>
-						// @ts-expect-error https://github.com/ueberdosis/tiptap/issues/6670
 						({ commands }) => {
 							return commands.setMark(this.name);
 						},
 					toggleInfoBlock:
 						() =>
-						// @ts-expect-error https://github.com/ueberdosis/tiptap/issues/6670
 						({ commands }) => {
 							return commands.toggleWrap(this.name);
 						},
 					unsetInfoBlock:
 						() =>
-						// @ts-expect-error https://github.com/ueberdosis/tiptap/issues/6670
 						({ commands }) => {
 							return commands.lift(this.name);
 						}

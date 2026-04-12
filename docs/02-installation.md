@@ -93,12 +93,10 @@ export default defineConfig({
 // src/lib/+rime/rime.config.ts
 import { rime, Collection } from '$rime/config';
 import { text } from 'rimecms/fields';
-import { sqliteAdapter } from 'rimecms/sqlite'
+import { sqliteAdapter } from 'rimecms/sqlite';
 
 const Pages = Collection.create('pages', {
-  fields: [
-    text('title').isTitle().required(),
-  ]
+  fields: [text('title').isTitle().required()]
 });
 
 export default rime({

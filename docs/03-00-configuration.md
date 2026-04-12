@@ -31,11 +31,11 @@ import { Collection, Area } from '$rime/config';
 import { text, toggle } from 'rimecms/fields';
 
 const Settings = Area.create('settings', {
-	fields: [toggle('maintenance')]
+  fields: [toggle('maintenance')]
 });
 
 const Pages = Collection.create('pages', {
-	fields: [text('title').isTitle().required()]
+  fields: [text('title').isTitle().required()]
 });
 ```
 
@@ -51,7 +51,7 @@ The database adapter with as param the name of the database located in ./db.
 
 ```ts
 export default rime({
-	$adapter: sqliteAdapter('my-app.sqlite')
+  $adapter: sqliteAdapter('my-app.sqlite')
 });
 ```
 
@@ -61,16 +61,16 @@ Smtp configuration to enable the rime.mailer core plugin and Better-Auth email f
 
 ```ts
 export default rime({
-	//...
-	$smtp: {
-		from: process.env.RIME_SMTP_USER,
-		host: process.env.RIME_SMTP_HOST,
-		port: parseInt(process.env.RIME_SMTP_PORT || '465'),
-		auth: {
-			user: process.env.RIME_SMTP_USER,
-			password: process.env.RIME_SMTP_PASSWORD
-		}
-	}
+  //...
+  $smtp: {
+    from: process.env.RIME_SMTP_USER,
+    host: process.env.RIME_SMTP_HOST,
+    port: parseInt(process.env.RIME_SMTP_PORT || '465'),
+    auth: {
+      user: process.env.RIME_SMTP_USER,
+      password: process.env.RIME_SMTP_PASSWORD
+    }
+  }
 });
 ```
 
@@ -82,22 +82,22 @@ Additional better-auth configuration, currently only adding server plugins is su
 import { magicLink } from 'better-auth/plugins';
 
 export default rime({
-	//...
-	$auth: {
-		plugins: [
-			magicLink({
-				sendMagicLink: async ({ email, token, url }, request) => {
-					const event = getRequestEvent();
-					event.rime.mailer.sendMail({
-						// (Require $stmp config to be set)
-						to: email,
-						subject: 'Sign-in',
-						text: `Your sign-in link ${url}`
-					});
-				}
-			})
-		]
-	}
+  //...
+  $auth: {
+    plugins: [
+      magicLink({
+        sendMagicLink: async ({ email, token, url }, request) => {
+          const event = getRequestEvent();
+          event.rime.mailer.sendMail({
+            // (Require $stmp config to be set)
+            to: email,
+            subject: 'Sign-in',
+            text: `Your sign-in link ${url}`
+          });
+        }
+      })
+    ]
+  }
 });
 ```
 
@@ -107,8 +107,8 @@ Which hosts are allowed to query the API. This property is also forwarded to the
 
 ```ts
 export default rime({
-	//...
-	$trustedOrigins: [process.env.PUBLIC_RIME_URL] // Default
+  //...
+  $trustedOrigins: [process.env.PUBLIC_RIME_URL] // Default
 });
 ```
 
@@ -118,10 +118,10 @@ API cache configuration. Only GET requests from non-panel routes are cached. Def
 
 ```ts
 export default rime({
-	//...
-	$cache: {
-		isEnabled: (event: RequestEvent) => !event.locals.user // default
-	}
+  //...
+  $cache: {
+    isEnabled: (event: RequestEvent) => !event.locals.user // default
+  }
 });
 ```
 
@@ -133,12 +133,12 @@ Custom API routes definition. `GET`, `POST`, `PATCH`, `DELETE` are supported.
 
 ```ts
 export default rime({
-	//...
-	$routes: {
-		'/api/custom-route': {
-			GET: async (event: RequestEvent) => json({ custom: true })
-		}
-	}
+  //...
+  $routes: {
+    '/api/custom-route': {
+      GET: async (event: RequestEvent) => json({ custom: true })
+    }
+  }
 });
 ```
 
@@ -148,10 +148,10 @@ Custom object passed to the server-only config.
 
 ```ts
 export default rime({
-	//...
-	$custom: {
-		API_KEY: '12345'
-	}
+  //...
+  $custom: {
+    API_KEY: '12345'
+  }
 });
 // Which you can retrieve than with : rime.config.raw.$custom.API_KEY
 ```
@@ -162,8 +162,8 @@ When defined, a preview button will be added on the panel dashboard header, poin
 
 ```ts
 export default rime({
-	//...
-	siteUrl: 'https://www.my-front-end.com'
+  //...
+  siteUrl: 'https://www.my-front-end.com'
 });
 ```
 
@@ -185,11 +185,11 @@ Additional config for panel users collections. // @TODO add full configuration p
 
 ```ts
 export default rime({
-	//...
-	staff: {
-		roles: ['editor', { label: 'SEO manager', value: 'seo' }],
-		fields: [text('website')]
-	}
+  //...
+  staff: {
+    roles: ['editor', { label: 'SEO manager', value: 'seo' }],
+    fields: [text('website')]
+  }
 });
 ```
 
@@ -199,12 +199,12 @@ Panel access options and specific properties. // @TODO add full configuration pa
 
 ```ts
 export default rime({
-	//...
-	panel: {
-		$access: (user) => !!user && user.roles.includes('admin'),
-		fields: [text('website')],
-		css: '/panel/custom.css'
-	}
+  //...
+  panel: {
+    $access: (user) => !!user && user.roles.includes('admin'),
+    fields: [text('website')],
+    css: '/panel/custom.css'
+  }
 });
 ```
 
@@ -214,9 +214,9 @@ Custom config available server-side and client-side (for example in a custom fie
 
 ```ts
 export default rime({
-	//...
-	custom: {
-		colorList: ['orange', 'blue']
-	}
+  //...
+  custom: {
+    colorList: ['orange', 'blue']
+  }
 });
 ```

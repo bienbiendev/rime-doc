@@ -4,8 +4,8 @@ To enable file upload capabilities on a collection :
 import { Collection, Hooks } from '$rime/config';
 
 const Medias = Collection.create('medias', {
-	upload: true
-	//...
+  upload: true
+  //...
 });
 ```
 
@@ -13,16 +13,16 @@ Once enabled a collection document get some additionals properties :
 
 ```ts
 {
-	//...
-	"filename": "screenshot-2026-03-20-at-103746.png",
-	"filesize": "64.33KB",
-	"url": "/medias/screenshot-2026-03-20-at-103746.png",
-	"mimeType": "image/png",
-	"sizes": {
-		"thumbnail": "/medias/screenshot-2026-03-20-at-103746-thumbnail-400.png"
-	},
-	"_path": "root:Some directory",
-	"_thumbnail": "/medias/screenshot-2026-03-20-at-103746-thumbnail-400.png"
+  //...
+  "filename": "screenshot-2026-03-20-at-103746.png",
+  "filesize": "64.33KB",
+  "url": "/medias/screenshot-2026-03-20-at-103746.png",
+  "mimeType": "image/png",
+  "sizes": {
+    "thumbnail": "/medias/screenshot-2026-03-20-at-103746-thumbnail-400.png"
+  },
+  "_path": "root:Some directory",
+  "_thumbnail": "/medias/screenshot-2026-03-20-at-103746-thumbnail-400.png"
 }
 ```
 
@@ -32,16 +32,16 @@ You can define custom image sizes to be generated on upload with the `upload.ima
 
 ```ts
 const Medias = Collection.create('medias', {
-	upload: {
-		imageSizes: [
-			{ name: 'xl', width: 2880, compression: 60, out: ['jpg', 'webp'] },
-			{ name: 'lg', width: 1920, compression: 60, out: ['jpg', 'webp'] },
-			{ name: 'md', width: 1440, compression: 60, out: ['jpg', 'webp'] },
-			{ name: 'sm', width: 960, compression: 60, out: ['jpg', 'webp'] },
-			{ name: 'thumbnail', width: 768, compression: 60, out: ['jpg'] }
-		]
-	}
-	//...
+  upload: {
+    imageSizes: [
+      { name: 'xl', width: 2880, compression: 60, out: ['jpg', 'webp'] },
+      { name: 'lg', width: 1920, compression: 60, out: ['jpg', 'webp'] },
+      { name: 'md', width: 1440, compression: 60, out: ['jpg', 'webp'] },
+      { name: 'sm', width: 960, compression: 60, out: ['jpg', 'webp'] },
+      { name: 'thumbnail', width: 768, compression: 60, out: ['jpg'] }
+    ]
+  }
+  //...
 });
 ```
 
@@ -51,17 +51,17 @@ An upload collection get an associated directories collection `{collectionSlug}_
 
 ```ts
 const Medias = Collection.create('medias', {
-	upload: {
-		directories: {
-			fields: [
-				text('description').label('Description'),
-				relation('allowedGroups').to('userGroups').many()
-			],
-			$hooks: {
-				beforeRead: [handleDirectoryPermissions]
-			}
-		}
-	}
-	//...
+  upload: {
+    directories: {
+      fields: [
+        text('description').label('Description'),
+        relation('allowedGroups').to('userGroups').many()
+      ],
+      $hooks: {
+        beforeRead: [handleDirectoryPermissions]
+      }
+    }
+  }
+  //...
 });
 ```
