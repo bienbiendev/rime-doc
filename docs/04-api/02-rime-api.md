@@ -245,7 +245,7 @@ query: {
 }
 ```
 
-The object format is especially useful when building queries programmatically. See the [REST API](/docs/04-01-api__rest-api.md#where) for the full list of supported operators.
+The object format is especially useful when building queries programmatically. See the [REST API](/docs/04-api/01-rest-api.md#where) for the full list of supported operators.
 
 ## System operations
 

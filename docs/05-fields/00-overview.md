@@ -26,27 +26,27 @@ const posts = Collection.create('posts', {
 
 ## Built-in fields
 
-[resource:pages:blocks](/docs/04-01-fields__blocks.md)
-[resource:pages:checkbox](/docs/04-02-fields__checkbox.md)
-[resource:pages:combobox](/docs/04-03-fields__combobox.md)
-[resource:pages:component](/docs/04-04-fields__component.md)
-[resource:pages:date](/docs/04-05-fields__date.md)
-[resource:pages:email](/docs/04-06-fields__email.md)
-[resource:pages:group](/docs/04-07-fields__group.md)
-[resource:pages:link](/docs/04-08-fields__link.md)
-[resource:pages:number](/docs/04-09-fields__number.md)
-[resource:pages:radio](/docs/04-10-fields__radio.md)
-[resource:pages:relation](/docs/04-11-fields__relation.md)
-[resource:pages:rich-text](/docs/04-12-fields__rich-text.md)
-[resource:pages:select](/docs/04-13-fields__select.md)
-[resource:pages:separator](/docs/04-14-fields__separator.md)
-[resource:pages:slug](/docs/04-15-fields__slug.md)
-[resource:pages:tabs](/docs/04-16-fields__tabs.md)
-[resource:pages:text](/docs/04-17-fields__text.md)
-[resource:pages:textarea](/docs/04-18-fields__textarea.md)
-[resource:pages:time](/docs/04-19-fields__time.md)
-[resource:pages:toggle](/docs/04-20-fields__toggle.md)
-[resource:pages:tree](/docs/04-21-fields__tree.md)
+[resource:pages:blocks](/docs/05-fields/01-blocks.md)
+[resource:pages:checkbox](/docs/05-fields/02-checkbox.md)
+[resource:pages:combobox](/docs/05-fields/03-combobox.md)
+[resource:pages:component](/docs/05-fields/04-component.md)
+[resource:pages:date](/docs/05-fields/06-date.md)
+[resource:pages:email](/docs/05-fields/07-email.md)
+[resource:pages:group](/docs/05-fields/08-group.md)
+[resource:pages:link](/docs/05-fields/011-link.md)
+[resource:pages:number](/docs/05-fields/012-number.md)
+[resource:pages:radio](/docs/05-fields/013-radio.md)
+[resource:pages:relation](/docs/05-fields/014-relation.md)
+[resource:pages:rich-text](/docs/05-fields/015-rich-text.md)
+[resource:pages:select](/docs/05-fields/016-select.md)
+[resource:pages:separator](/docs/05-fields/017-separator.md)
+[resource:pages:slug](/docs/05-fields/018-slug.md)
+[resource:pages:tabs](/docs/05-fields/019-tabs.md)
+[resource:pages:text](/docs/05-fields/020-text.md)
+[resource:pages:textarea](/docs/05-fields/020-text.md)
+[resource:pages:time](/docs/05-fields/022-time.md)
+[resource:pages:toggle](/docs/05-fields/023-toggle.md)
+[resource:pages:tree](/docs/05-fields/024-tree.md)
 
 ## Fields shared methods
 
@@ -151,7 +151,7 @@ const intro = text('intro').label('Introduction');
 
 ### localized
 
-Set a field as localized. More on [i18n](/docs/03-04-configuration__i18n.md).
+Set a field as localized. More on [i18n](/docs/03-configuration/04-i18n.md).
 
 ```ts
 import { text } from 'rimecms';

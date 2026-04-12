@@ -47,12 +47,12 @@ Each block in the array has a `type` property matching the block's `name`, an `i
 {
   "sections": [
     {
-      "id": "abc",
+      "id": "123",
       "type": "paragraph",
       "text": { "type": "doc", "content": [...] }
     },
     {
-      "id": "def",
+      "id": "456",
       "type": "image",
       "image": { "relationTo": "medias", "documentId": "xyz" },
       "legend": "A sunset over the mountains"

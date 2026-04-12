@@ -41,4 +41,4 @@ const layout = tabs(
 );
 ```
 
-> **Note:** Because tabs are layout-only, they do not appear in the [shared field methods](/docs/05-00-fields.md#fields-shared-methods) (no `.required()`, `.label()`, etc. on the container).
+> **Note:** Because tabs are layout-only, they do not appear in the [shared field methods](/docs/05-fields/00-overview.md#fields-shared-methods) (no `.required()`, `.label()`, etc. on the container).

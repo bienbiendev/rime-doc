@@ -9,7 +9,7 @@ const content = richText('content').features(bold(), heading(2, 3), link());
 
 ## Methods
 
-In addition to the [shared field methods](/docs/05-00-fields.md#fields-shared-methods), a richText field exposes the following methods.
+In addition to the [shared field methods](/docs/05-fields/00-overview.md#fields-shared-methods), a richText field exposes the following methods.
 
 ### features
 

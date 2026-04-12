@@ -8,7 +8,7 @@ const approved = checkbox('approved');
 
 ## Methods
 
-In addition to the [shared field methods](/docs/04-00-fields.md#fields-shared-methods), a checkbox field exposes the following methods:
+In addition to the [shared field methods](/docs/05-fields/00-overview.md#fields-shared-methods), a checkbox field exposes the following methods:
 
 ### defaultValue
 

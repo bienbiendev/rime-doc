@@ -83,7 +83,7 @@ const { doc } = await rime.collection('news').updateById({
 
 ## REST API
 
-All the standard [REST API](/docs/04-01-api__rest-api.md) endpoints are available on versioned documents, with the following additional query parameters: `versionId` to target a specific version snapshot (returns `404` if not found), and `draft=true` to read or write draft versions.
+All the standard [REST API](/docs/04-api/01-rest-api.md) endpoints are available on versioned documents, with the following additional query parameters: `versionId` to target a specific version snapshot (returns `404` if not found), and `draft=true` to read or write draft versions.
 
 | Method  | URI                           | Action                        |
 | ------- | ----------------------------- | ----------------------------- |

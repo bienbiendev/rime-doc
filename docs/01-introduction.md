@@ -6,9 +6,9 @@
 
 The main goal of **Rime** is to provide instant access to a flexible admin panel, with all the essential tools to build your project, including:
 
-- Built-in [i18n](/docs/03-04-configuration__i18n.md) support
+- Built-in [i18n](/docs/03-configuration/04-i18n.md) support
 - Version system
-- A wide variety of [fields](/docs/04-fieds.md), including blocks and nested arrays
+- A wide variety of [fields](/docs/05-fields/00-overview.md), including blocks and nested arrays
 - A flexible, intuitive rich-text editor
 - Headless architecture, so you can build your front-end without limitations
 - Automatic API endpoint generation

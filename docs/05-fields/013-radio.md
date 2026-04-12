@@ -8,7 +8,7 @@ const alignment = radio('alignment').options('left', 'center', 'right');
 
 ## Methods
 
-In addition to the [shared field methods](/docs/05-00-fields.md#fields-shared-methods), a radio field exposes the following methods.
+In addition to the [shared field methods](/docs/05-fields/00-overview.md#fields-shared-methods), a radio field exposes the following methods.
 
 ### options
 

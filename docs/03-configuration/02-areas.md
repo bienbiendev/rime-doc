@@ -31,7 +31,7 @@ Access rules for this area.
 
 ### fields {!required!}
 
-Area fields definition. [More](/docs/04-00-fields.md).
+Area fields definition. [More](/docs/05-fields/00-overview.md).
 
 ### icon
 

@@ -34,7 +34,7 @@ curl -v POST http://localhost:5173/api/init \
 
 You can now visit the `/panel`, in which there will be nothing more than the basic stuffs, so let’s start adding some content types.
 
-[resource:pages:Configuration](/docs/03-00-configuration.md)
+[resource:pages:Configuration](/docs/03-configuration/00-overview.md)
 
 ## Manual installation
 

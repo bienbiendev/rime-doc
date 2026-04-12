@@ -1,0 +1,23 @@
+API are how you interact with your data, in addition to the auto-generated [REST API](/docs/04-api/01-rest-api.md), you have access server-side to the rime api which let you apply changes on your data.
+
+## Rest API
+
+```ts
+const { docs } = await fetch('/api/pages');
+```
+
+[resource:pages:installation](/docs/04-api/01-rest-api.md)
+
+## Rime API
+
+```ts
+import { error, type ServerLoadEvent } from '@sveltejs/kit';
+
+export const load = async ({ locals }: ServerLoadEvent) => {
+  const { rime } = locals;
+  const nav = await rime.area('nav').find();
+  return { nav };
+};
+```
+
+[resource:pages:installation](/docs/04-api/02-rime-api.md)

@@ -8,7 +8,7 @@ const price = number('price').min(0);
 
 ## Methods
 
-In addition to the [shared field methods](/docs/05-00-fields.md#fields-shared-methods), a number field exposes the following methods.
+In addition to the [shared field methods](/docs/05-fields/00-overview.md#fields-shared-methods), a number field exposes the following methods.
 
 ### min
 

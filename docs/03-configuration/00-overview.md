@@ -39,9 +39,9 @@ const Pages = Collection.create('pages', {
 });
 ```
 
-[resource:pages:collection](/docs/03-01-configuration__collections.md)
+[resource:pages:collection](/docs/03-configuration/01-collections.md)
 
-[resource:pages:areas](/docs/03-02-configuration__areas.md)
+[resource:pages:areas](/docs/03-configuration/02-areas.md)
 
 ## Properties
 
@@ -169,15 +169,15 @@ export default rime({
 
 ### collections
 
-List of collection documents configuration. [More](/docs/03-01-configuration__collections.md)
+List of collection documents configuration. [More](/docs/03-configuration/01-collections.md)
 
 ### areas
 
-List of areas documents configuration. [More](/docs/03-02-configuration__areas.md)
+List of areas documents configuration. [More](/docs/03-configuration/02-areas.md)
 
 ### localization
 
-Define available locales for your content. [More](/docs/03-04-configuration__areas.md)
+Define available locales for your content. [More](/docs/03-configuration/04-i18n.md).
 
 ### staff
 

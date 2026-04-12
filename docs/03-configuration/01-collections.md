@@ -24,7 +24,7 @@ A function that get the document as argument and return a string. When set this 
 
 ### $hooks {{server-only}}
 
-User defined hooks for operations fine grained control. [More](/docs/03-05-configuration__hooks.md)
+User defined hooks for operations fine grained control. [More](/docs/03-configuration/05-hooks.md)
 
 ```ts
 import { Collection, Hooks } from '$rime/config';
@@ -75,7 +75,7 @@ const Users = Collection.create('users', {
 
 ### fields {!required!}
 
-Collection fields definition [More](/docs/04-00-fields.md)
+Collection fields definition [More](/docs/05-fields/00-overview.md)
 
 ### icon
 
