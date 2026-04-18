@@ -49,6 +49,9 @@ interface PageCreateData {
 
 interface PageUpdateData {
   _position: number;
+  attributes: {
+    categories: string[];
+  };
   content: {
     text: any;
   };
@@ -247,6 +250,9 @@ async function updatePage(file: FileEntry, id: string): Promise<PagesDoc> {
   const content = await markdownToJson(file.content);
   const data: PageUpdateData = {
     _position: file.position,
+    attributes: {
+      categories: file.parent ? [file.parent] : []
+    },
     content: {
       text: content
     }
@@ -305,8 +311,6 @@ export const feed = async (): Promise<void> => {
     for (const file of Array.from(files)) {
       const id = uriMapId.get(file.uri);
       if (!id) {
-        console.log(file.uri);
-        console.log(uriMapId);
         throw new Error(`Missing /${file.uri} id in Map`);
       }
       const doc = await updatePage(file, id);
@@ -356,8 +360,6 @@ export const feed = async (): Promise<void> => {
       const doc = getDocByURI(file.uri);
 
       if (file.isParent) {
-        console.log('doc.title', doc.title);
-        console.log('index', index);
         const children = (parentMap[file.slug] || []).sort((a, b) => a.position - b.position);
         const overview: MainNavItem = {
           label: 'Overview',

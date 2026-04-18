@@ -139,7 +139,7 @@ const body = richText('body').features(
 );
 ```
 
-> [!NOTES] Blocks and Trees are not currently supported as inline nodes.
+> [!INFO] Blocks and Trees are not currently supported as inline nodes.
 
 ## Custom features
 

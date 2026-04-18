@@ -1,0 +1,4 @@
+.command-empty {
+  padding: var(--size-6);
+  opacity: 0.6;
+}

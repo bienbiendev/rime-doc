@@ -1,0 +1,24 @@
+.command-item {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+  min-height: var(--input-height);
+  align-items: center;
+  gap: var(--size-2);
+  padding-inline: var(--size-2);
+  padding-block: var(--size-1-5);
+  font-size: var(--font-size-text-sm);
+  outline: none;
+}
+
+.command-item[aria-selected='true'] {
+  border-radius: var(--radius-sm);
+  background-color: hsl(from var(--color-fg) h s l / 0.04);
+  color: hsl(var(--color-fg));
+}
+
+.command-item[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}

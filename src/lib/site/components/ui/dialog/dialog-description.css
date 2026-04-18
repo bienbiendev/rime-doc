@@ -1,0 +1,4 @@
+.dialog-description {
+  color: hsl(from var(--color-fg) h s l / 0.7);
+  font-size: var(--text-sm);
+}

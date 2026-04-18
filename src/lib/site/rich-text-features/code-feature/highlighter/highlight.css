@@ -1,0 +1,25 @@
+:root {
+  --shiki-foreground: var(--color-fg);
+  --shiki-background: var(--code-bg);
+  --shiki-token-constant: oklch(var(--light-9) 0.04 var(--hue-primary));
+  --shiki-token-string: oklch(var(--light-9) 0.04 var(--hue-primary));
+  --shiki-token-comment: oklch(var(--light-1) 0.9 var(--hue-primary) / 0.4);
+  --shiki-token-keyword: oklch(var(--light-9) 0.04 var(--hue-primary));
+  --shiki-token-parameter: oklch(var(--light-9) 0.04 var(--hue-primary));
+  --shiki-token-function: oklch(var(--light-5) 0.04 var(--hue-primary));
+  --shiki-token-string-expression: oklch(var(--light-7) 0.2 var(--hue-primary));
+  --shiki-token-punctuation: oklch(var(--light-11) 0 var(--hue-primary));
+  --shiki-token-link: oklch(var(--light-11) 0.04 var(--hue-primary));
+}
+
+html.dark {
+  --shiki-token-constant: oklch(var(--light-18) 0.06 var(--hue-primary));
+  --shiki-token-string: oklch(var(--light-16) 0.02 var(--hue-primary));
+  --shiki-token-comment: oklch(var(--light-9) 0 var(--hue-primary) / 0.6);
+  --shiki-token-keyword: oklch(var(--light-12) 0.02 var(--hue-primary));
+  --shiki-token-parameter: oklch(var(--light-9) 0.04 var(--hue-primary));
+  --shiki-token-function: oklch(var(--light-17) 0.2 var(--hue-primary));
+  --shiki-token-string-expression: oklch(var(--light-15) 0.03 var(--hue-primary));
+  --shiki-token-punctuation: oklch(var(--light-11) 0 var(--hue-primary));
+  --shiki-token-link: oklch(var(--light-11) 0.04 var(--hue-primary));
+}

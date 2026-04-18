@@ -1,0 +1,4 @@
+.rz-rich-text__editor pre,
+code {
+  font-size: var(--font-size-text-md);
+}

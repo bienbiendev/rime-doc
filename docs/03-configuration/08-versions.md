@@ -31,7 +31,7 @@ versions: {
 }
 ```
 
-> [!NOTE] Draft versions are only accessible to authenticated panel users. Unauthenticated requests always receive the published version, regardless of `draft` or `versionId` parameters and if no published version exists then a `404` is returned.
+> [!INFO] Draft versions are only accessible to authenticated panel users. Unauthenticated requests always receive the published version, regardless of `draft` or `versionId` parameters and if no published version exists then a `404` is returned.
 
 ### maxVersions
 

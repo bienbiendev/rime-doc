@@ -1,5 +1,3 @@
-# Hooks
-
 Rime provides various hooks that allow you to control operations throughout your application. Here's how you create a basic hook:
 
 ```ts

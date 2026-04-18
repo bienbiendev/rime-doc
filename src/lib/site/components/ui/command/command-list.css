@@ -1,0 +1,5 @@
+.command-list {
+  overflow-x: hidden;
+  background-color: var(--color-bg);
+  max-height: 19.75rem;
+}

@@ -1,0 +1,24 @@
+@import './text.css';
+
+@font-face {
+  font-family: 'geist';
+  src: url('/fonts/Geist-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'geist-mono';
+  src: url('/fonts/GeistMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 700;
+  font-style: normal;
+}
+
+:root {
+  --font-sans: 'geist', sans-serif;
+  --font-mono: 'geist-mono', mono;
+}
+
+body {
+  font-size: var(--font-size-text-md);
+}

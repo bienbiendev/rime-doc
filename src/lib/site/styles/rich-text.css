@@ -1,0 +1,101 @@
+.render-rich-text {
+  line-height: 1.6;
+  display: grid;
+  gap: var(--size-2);
+  grid-template-columns: 1fr 1fr;
+
+  > ol {
+    /* > li {
+      padding-left: 3em; */
+    position: relative;
+
+    li {
+      padding-left: 2.2em;
+      position: relative;
+
+      &::before {
+        content: attr(data-index);
+        font-weight: bold;
+        position: absolute;
+        font-size: var(--font-size-text-xs);
+        width: 2em;
+        height: 2em;
+        background-color: var(--color-fg);
+        color: var(--color-bg);
+        border-radius: 9999px;
+        display: flex;
+        left: 0;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: calc(100% + var(--size-4));
+        background-color: var(--color-border);
+        left: 0.8em;
+        top: 0;
+      }
+
+      &:last-child::after {
+        height: 100%;
+      }
+    }
+    /* } */
+
+    /* & + * {
+      margin-left: 2.2em;
+      border-left: 1px solid var(--color-border);
+    } */
+  }
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+
+  > *:not(.card-resource) {
+    grid-column: 1 / -1;
+  }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    p {
+      display: inline;
+    }
+  }
+
+  > h2 {
+    @mixin font-title;
+    font-size: var(--font-size-headline-lg);
+    margin-top: var(--size-8);
+    margin-bottom: var(--size-4);
+    scroll-margin-top: calc(var(--size-8) + var(--header-height));
+  }
+  > h3 {
+    @mixin font-title;
+    font-size: var(--font-size-headline-md);
+    margin-top: var(--size-8);
+
+    scroll-margin-top: calc(var(--size-8) + var(--header-height));
+  }
+  > h4 {
+    @mixin font-title;
+    font-size: var(--font-size-headline-sm);
+    margin-top: var(--size-8);
+
+    scroll-margin-top: calc(var(--size-8) + var(--header-height));
+  }
+
+  .card-resource {
+    margin-block: var(--size-4);
+  }
+}

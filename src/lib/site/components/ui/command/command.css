@@ -1,0 +1,14 @@
+.command {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  border-radius: var(--size-2);
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px #0000001a;
+}
+
+.dialog-content:has(.command) {
+  padding: 0;
+  box-shadow: none;
+}

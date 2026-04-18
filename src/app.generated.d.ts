@@ -26,6 +26,7 @@ export type PagesDoc = BaseDoc &  {
 		slug?: string,
 		longTitle?: string,
 		summary?: string,
+		categories?: ('fields' | 'configuration' | 'guides' | 'api')[],
 		icon?: string},
 	content: {text?: import('@tiptap/core').JSONContent}
 	_parent?: string

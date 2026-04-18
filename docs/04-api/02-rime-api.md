@@ -1,7 +1,6 @@
 The Rime API is the server-side interface for interacting with your data. It is available on `event.locals.rime` in any SvelteKit server context — load functions, form actions, hooks, and API routes.
 
 ```ts
-// src/routes/+page.server.ts
 export const load = async ({ locals }) => {
   const { rime } = locals;
   const settings = await rime.area('settings').find();
@@ -260,7 +259,7 @@ await rime
   });
 ```
 
-This should be used with caution and is not recommended for general use, but can be useful in certain scenarios such as data migrations or automated scripts.
+> [!INFO] This should be used with caution and is not recommended for general use, but can be useful in certain scenarios such as data migrations or automated scripts.
 
 ## locals
 

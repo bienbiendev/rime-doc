@@ -84,7 +84,7 @@ auth: {
 
 You can extend the underlying Better Auth instance with additional plugins using the `$auth` key. This is useful for adding OAuth providers, magic links, passkeys, or any other Better Auth plugin.
 
-> [!NOTE] The feature is experimental and has not been extensively tested with different plugin types.
+> [!INFO] The feature is experimental and has not been extensively tested with different plugin types.
 
 ```ts
 import { github } from 'better-auth/social-providers';

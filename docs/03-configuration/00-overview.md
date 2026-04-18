@@ -3,7 +3,7 @@ If you’ve followed the [installation](/docs/02-installation.md) steps correctl
 The configuration is the core of **Rime**, this is where you configure how your documents will be structured, localization, panel access, custom API routes and [more](#properties)… The configuration entry **must be located at **`src/lib/+rime/rime.config.ts`. Here is a basic configuration example :
 
 ```ts
-// src/lib/+rime/rime.config.ts
+// @file:src/lib/+rime/rime.config.ts
 import { rime, Collection } from '$rime/config';
 import { text } from 'rimecms/fields';
 import { sqliteAdapter } from 'rimecms/sqlite'
@@ -88,8 +88,8 @@ export default rime({
       magicLink({
         sendMagicLink: async ({ email, token, url }, request) => {
           const event = getRequestEvent();
+          // (Require $stmp config to be set)
           event.rime.mailer.sendMail({
-            // (Require $stmp config to be set)
             to: email,
             subject: 'Sign-in',
             text: `Your sign-in link ${url}`
@@ -108,7 +108,7 @@ Which hosts are allowed to query the API. This property is also forwarded to the
 ```ts
 export default rime({
   //...
-  $trustedOrigins: [process.env.PUBLIC_RIME_URL] // Default
+  $trustedOrigins: [process.env.PUBLIC_RIME_URL] // default
 });
 ```
 
@@ -181,7 +181,7 @@ Define available locales for your content. [More](/docs/03-configuration/04-i18n
 
 ### staff
 
-Additional config for panel users collections. // @TODO add full configuration page
+Additional config for panel [users collections](/docs/03-configuration/07-auth.md#staff).
 
 ```ts
 export default rime({
@@ -195,7 +195,7 @@ export default rime({
 
 ### panel
 
-Panel access options and specific properties. // @TODO add full configuration page
+Panel access options and specific properties.
 
 ```ts
 export default rime({
