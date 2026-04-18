@@ -47,7 +47,7 @@
     cursor: not-allowed;
   }
   .input::placeholder {
-    @mixin color color-fg, 0.5;
+    color: hsl(from var(--color-fg) h s l / 0.5);
   }
 
   .input:focus-visible {

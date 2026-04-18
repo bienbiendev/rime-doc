@@ -3,7 +3,10 @@
 
   const { node, children }: RichTextNodeRendererProps = $props();
 
-  const { dataType, ...restAttrs } = node.attrs as { dataType: string } & Record<string, any>;
+  const { dataType, ...restAttrs } = $derived(node.attrs) as { dataType: string } & Record<
+    string,
+    any
+  >;
 </script>
 
 <blockquote data-type={dataType} {...restAttrs}>

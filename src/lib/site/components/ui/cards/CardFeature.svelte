@@ -10,7 +10,7 @@
     icon: Component<IconProps>;
   };
   const { title, uptitle, icon, description, link }: Props = $props();
-  const Icon = icon;
+  const Icon = $derived(icon);
 </script>
 
 <a class="card-feature" href={link}>
