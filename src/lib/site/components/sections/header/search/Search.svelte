@@ -5,10 +5,11 @@
   import Shortcut from '$lib/site/components/ui/shortcut/Shortcut.svelte';
   import { Search } from '@lucide/svelte';
 
-  import type { JSONContent } from '@tiptap/core';
   import { onMount } from 'svelte';
+  import { createSearchIndex, getOccurrences } from './search';
   import type { SearchIndex } from './type';
 
+  // , so instead of dummy add previous/next n words, it break at line breaks : like 4 words max before the occurence untile linebreak, and 8 words max after until line-break
   // type Props = {  }
   // const { }: Props = $props()
 
@@ -20,101 +21,9 @@
   let results = $state<SearchIndex>([]);
   let previousQuery = '';
 
-  const richTextJSONToText = (value: string | JSONContent): string => {
-    if (!value) return '';
-    let textValue: string;
-    const renderNodes = (nodes: { [k: string]: any }) => {
-      return nodes
-        .map((node: { text?: string; [k: string]: any }) => {
-          if (node.type === 'codeBlock') return '';
-          if ('text' in node) {
-            return node.text;
-          } else if ('content' in node) {
-            return renderNodes(node.content);
-          }
-        })
-        .join(' ');
-    };
-
-    try {
-      const jsonContent = typeof value === 'string' ? JSON.parse(value) : value;
-      textValue = renderNodes(jsonContent.content);
-    } catch (err) {
-      console.error(err);
-      textValue = JSON.stringify(value);
-    }
-    return textValue;
-  };
-
-  function getOccurrences(content: string, search: string): string[] {
-    if (!search || !content) return [];
-
-    const words = content.split(/\s+/);
-
-    // Build the character offset of each word's start
-    const offsets: number[] = [];
-    let pos = 0;
-    for (const word of words) {
-      offsets.push(pos);
-      pos += word.length + 1; // +1 for the whitespace separator
-    }
-
-    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(escaped, 'gi');
-    const occurrences: string[] = [];
-    let match: RegExpExecArray | null;
-
-    while ((match = regex.exec(content)) !== null) {
-      const matchStart = match.index;
-      const matchEnd = match.index + match[0].length;
-
-      // Last word whose offset is ≤ matchStart
-      let startWord = 0;
-      for (let i = offsets.length - 1; i >= 0; i--) {
-        if (offsets[i] <= matchStart) {
-          startWord = i;
-          break;
-        }
-      }
-
-      // Last word whose offset is < matchEnd (handles multi-word matches)
-      let endWord = startWord;
-      for (let i = offsets.length - 1; i >= 0; i--) {
-        if (offsets[i] < matchEnd) {
-          endWord = i;
-          break;
-        }
-      }
-
-      const from = Math.max(0, startWord - 4);
-      const to = Math.min(words.length, endWord + 1 + 12);
-      const snippet = words.slice(from, to).join(' ');
-      const highlighted = snippet.replace(
-        new RegExp(escaped, 'gi'),
-        (m) => `<span class="highlight">${m}</span>`
-      );
-      occurrences.push(highlighted);
-    }
-
-    return occurrences;
-  }
-
   onMount(async () => {
     pages = await fetch('/api/search.json').then((res) => res.json());
-    for (const page of pages) {
-      if (!page.url) continue;
-      searchIndex.push({
-        id: page.id,
-        title: page.attributes.longTitle || page.attributes.title!,
-        keywords: [
-          page.attributes.longTitle || page.attributes.title!,
-          ...(page.attributes.categories || [])
-        ],
-        content: richTextJSONToText(page.content.text || ''),
-        summary: page.attributes.summary || '',
-        url: page.url
-      });
-    }
+    searchIndex = createSearchIndex(pages);
     isLoading = false;
   });
 
@@ -125,19 +34,17 @@
     }
   }
 
-  function customFilter(commandValue: string, search: string, commandKeywords?: string[]): number {
+  function computeScore(item: SearchIndex[number], search: string): number {
     let score = 0;
-    if (commandKeywords) {
-      for (const [index, keyword] of commandKeywords.entries()) {
+    if (item.keywords) {
+      for (const [index, keyword] of item.keywords.entries()) {
         if (keyword.includes(search)) {
-          score += (commandKeywords.length - index) * 0.1;
+          score += item.weight * (item.keywords.length - index) * 0.1;
         }
       }
     }
-    const matches = commandValue.matchAll(new RegExp(search, 'gi'));
-    for (const match of matches) {
-      score += 0.01;
-    }
+    const matches = item.content.matchAll(new RegExp(search, 'gi'));
+    score += Array.from(matches || []).length * item.weight * 0.01;
     return score;
   }
 
@@ -146,8 +53,8 @@
       results = searchIndex
         .map((item) => ({
           ...item,
-          content: getOccurrences(item.content, query).slice(0, 3).join(' ... '),
-          score: customFilter(item.content, query, item.keywords)
+          content: getOccurrences(item.content, query).slice(0, 2).join(' ... '),
+          score: computeScore(item, query)
         }))
         .filter((item) => item.score > 0)
         .sort((a, b) => b.score - a.score)
@@ -163,7 +70,7 @@
 <Dialog.Root bind:open={searchOpen}>
   <Dialog.Trigger>
     {#snippet child({ props })}
-      <Button variant="secondary" {...props} --border-radius="var(--size-1)">
+      <Button class="search-trigger" variant="secondary" {...props} --border-radius="var(--size-1)">
         <Search size="12" /> Search <span></span>
         <Shortcut>K</Shortcut>
       </Button>
@@ -171,10 +78,10 @@
   </Dialog.Trigger>
 
   <Dialog.Portal>
-    <Dialog.Overlay class="dialog-overlay" />
-    <Dialog.Content size="lg" class="dialog-content">
-      <Command.Root shouldFilter={false} filter={customFilter}>
-        <Command.Input bind:value={query} />
+    <Dialog.Overlay />
+    <Dialog.Content size="lg" class="search-dialog-content">
+      <Command.Root shouldFilter={false}>
+        <Command.Input bind:value={query} class="search-command-input" />
         <Command.List>
           <Command.Viewport>
             {#if query}
@@ -183,7 +90,7 @@
                 <Command.LinkItem
                   onSelect={() => (searchOpen = false)}
                   keywords={item.keywords}
-                  value={item.content}
+                  value={item.url}
                   href={item.url}
                 >
                   <span>{item.title}</span>
@@ -203,6 +110,20 @@
     flex: 2;
   }
   :global {
+    .button.search-trigger {
+      --button-border-radius: var(--size-1);
+      background-color: hsl(from var(--color-bg--accent) h s l / 0.8);
+      font-variation-settings: 'wght' 400;
+      font-weight: 400;
+      min-width: 33vw;
+      backdrop-filter: blur(3px);
+    }
+    .search-dialog-content {
+      background-color: none;
+      transform: translate(-50%, 0%);
+      top: 20%;
+    }
+
     .command-link-item {
       display: grid;
       gap: 0;

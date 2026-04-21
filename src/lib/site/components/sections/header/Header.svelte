@@ -2,11 +2,14 @@
   import Logo from '$lib/site/components/Logo.svelte';
   import Button from '$lib/site/components/ui/button/Button.svelte';
   import * as DropdownMenu from '$lib/site/components/ui/dropdown-menu/index.js';
+  import { getThemeContext } from '$lib/site/theme.svelte';
   import { Moon, Sun } from '@lucide/svelte';
-  import { mode, resetMode, setMode } from 'mode-watcher';
+  import Search from './search/Search.svelte';
 
   type Props = { border?: boolean };
   const { border = false }: Props = $props();
+
+  const theme = getThemeContext();
 </script>
 
 <header class:header--border={border}>
@@ -15,12 +18,12 @@
       <Logo />
     </a>
 
-    <!-- <Search /> -->
-
     <!-- <nav>
 			<Button href="/docs/introduction" variant="link">docs</Button>
 		</nav> -->
   </div>
+
+  <Search />
 
   <div class="header__right">
     <Button
@@ -44,16 +47,16 @@
             {...props}
             size="icon"
             variant="ghost"
-            icon={mode.current === 'light' ? Sun : Moon}
-          ></Button>
+            icon={theme.value === 'light' ? Sun : Moon}
+          />
         {/snippet}
         <span class="sr-only">Toggle theme</span>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Content align="end">
-        <DropdownMenu.Item onclick={() => setMode('light')}>Light</DropdownMenu.Item>
-        <DropdownMenu.Item onclick={() => setMode('dark')}>Dark</DropdownMenu.Item>
-        <DropdownMenu.Item onclick={() => resetMode()}>System</DropdownMenu.Item>
+        <DropdownMenu.Item onclick={() => (theme.mode = 'light')}>Light</DropdownMenu.Item>
+        <DropdownMenu.Item onclick={() => (theme.mode = 'dark')}>Dark</DropdownMenu.Item>
+        <DropdownMenu.Item onclick={() => (theme.mode = 'system')}>System</DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   </div>

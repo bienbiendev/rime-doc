@@ -2,7 +2,6 @@
   import { page } from '$app/state';
   import { PUBLIC_RIME_URL } from '$env/static/public';
   import Button from '$lib/site/components/ui/button/Button.svelte';
-  import Search from '../header/search/Search.svelte';
 
   type Props = { nav: NavDoc };
   const { nav }: Props = $props();
@@ -10,7 +9,6 @@
 
 <div class="nav-wrapper">
   <nav>
-    <Search />
     {#each nav.main as group, index (group.id)}
       {#if group._children.length}
         <p class="nav-group-label">{group.label}</p>

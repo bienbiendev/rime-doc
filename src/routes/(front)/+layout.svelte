@@ -1,10 +1,10 @@
 <script lang="ts">
   import '$lib/site/styles/index.css';
-  import { ModeWatcher } from 'mode-watcher';
-  import { type Snippet } from 'svelte';
+  import { setThemeContext } from '$lib/site/theme.svelte.js';
 
-  const { children }: { children: Snippet } = $props();
+  const { children, data } = $props();
+
+  setThemeContext(data.theme);
 </script>
 
-<ModeWatcher />
-{@render children()}
+<div>{@render children()}</div>

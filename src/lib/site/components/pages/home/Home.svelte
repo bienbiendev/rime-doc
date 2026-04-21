@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { browser } from '$app/environment';
   import Header from '$lib/site/components/sections/header/Header.svelte';
   import Button from '$lib/site/components/ui/button/Button.svelte';
+
+  import { getThemeContext } from '$lib/site/theme.svelte';
   import type { WithRelationPopulated } from 'rimecms/types';
   import Features from './Features.svelte';
 
@@ -11,10 +12,10 @@
   let scrollY = $state(0);
   let previewImgScale = $state(1);
 
+  const theme = getThemeContext();
+
   $effect(() => {
-    if (browser) {
-      initScroll();
-    }
+    initScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
@@ -28,8 +29,8 @@
 
   function onAnimationFrame() {
     scrollY = window.scrollY;
-    let scaleValue = 1 - (0.05 * scrollY) / window.innerHeight;
-    previewImgScale = Math.min(Math.max(scaleValue, 0.93), 1);
+    let scaleValue = 1 - (0.05 * scrollY) / (window.innerHeight / 2);
+    previewImgScale = Math.min(Math.max(scaleValue, 0.91), 1);
   }
 </script>
 
@@ -60,12 +61,9 @@
       </div>
     </div>
   </header>
-  <img
-    style="--scale:{previewImgScale}"
-    class="hero__preview"
-    src="/rime-preview.jpg"
-    alt="preview of the admin panel"
-  />
+  <div style="--scale:{previewImgScale}" class="hero__preview">
+    <img src="/rime-preview-{theme.value}.jpg" alt="preview of the admin panel" />
+  </div>
 </section>
 
 <Features />
@@ -76,7 +74,6 @@
   }
 
   .hero {
-    padding-inline: var(--page-gutter);
     margin-top: calc(-1 * var(--header-height));
     display: grid;
     place-content: center;
@@ -87,7 +84,7 @@
     /* text-align: center; */
     height: 88vh;
     max-width: 700px;
-    padding-inline: 5vw;
+    padding-inline: var(--page-gutter-lg);
     > div {
       place-content: end left;
       height: 100%;
@@ -95,10 +92,16 @@
       gap: var(--size-6);
     }
   }
-  img {
-    clip-path: rect(6.6vw 95vw 59.25vw 5vw round 10px);
-    transform: translateY(-5vh) scale(var(--scale, 1));
+
+  .hero__preview {
+    border: 3px solid var(--color-border);
+    overflow: hidden;
+    margin-inline: var(--page-gutter);
+    border-radius: var(--size-3);
+    margin-top: var(--size-12);
+    transform: scale(var(--scale, 1));
   }
+
   aside {
     font-size: var(--font-size-text-sm);
   }

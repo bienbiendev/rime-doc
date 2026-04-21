@@ -11,7 +11,7 @@
 </script>
 
 <div class="command-input" data-command-input-wrapper="">
-  <Search class="command-input__icon" size={12} />
+  <Search class="command-input__icon" size={14} />
   <CommandPrimitive.Input
     class="command-input__input {className}"
     bind:ref
@@ -22,13 +22,14 @@
 
 <style type="postcss">
   .command-input {
-    background-color: var(--color-bg--accent);
+    background-color: var(--color-bg);
     display: flex;
     align-items: center;
     border-top-left-radius: var(--radius-md);
     border-top-right-radius: var(--radius-md);
     padding-inline: var(--size-3);
     padding-block: var(--size-1);
+    border-bottom: 1px solid var(--color-border);
 
     &:global([data-focused]) {
       @mixin ring var(--color-ring);
@@ -46,7 +47,7 @@
 
     & :global(.command-input__input) {
       display: flex;
-      height: var(--size-10);
+      height: var(--size-12);
       width: 100%;
       background-color: transparent;
       font-size: var(--text-sm);

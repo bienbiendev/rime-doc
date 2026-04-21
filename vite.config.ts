@@ -5,8 +5,9 @@ import { defineConfig } from 'vite';
 const dev = process.env.NODE_ENV === 'development';
 
 export default defineConfig({
-	plugins: [rime(), sveltekit()],
-	server: {
-		allowedHosts: dev ? ['http://localhost'] : undefined
-	}
+  plugins: [rime(), sveltekit()],
+  server: {
+    host: process.env.DEV_HOST || 'localhost',
+    allowedHosts: dev ? ['http://localhost'] : undefined
+  }
 });

@@ -12,7 +12,7 @@
   <ul>
     {#each home.features as feature, index (index)}
       <li>
-        <CardFeature {...feature} />
+        <CardFeature {index} {...feature} />
       </li>
     {/each}
   </ul>
@@ -22,9 +22,12 @@
 </section>
 
 <style lang="postcss">
+  @import '../../../styles/mixins/index.css';
+
   h2 {
     text-align: center;
     font-size: var(--font-size-headline-xl);
+    @mixin font-title;
   }
 
   p {
@@ -36,8 +39,8 @@
     display: grid;
     gap: var(--size-12);
     grid-template-columns: var(--section-gutter) 1fr var(--section-gutter);
-    margin-bottom: var(--section-space-y);
-    padding-inline: var(--page-gutter);
+    margin-block: var(--section-space-y);
+    padding-inline: var(--page-gutter-lg);
   }
 
   header,

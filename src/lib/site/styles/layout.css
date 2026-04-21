@@ -1,5 +1,6 @@
 :root {
   --page-gutter: var(--size-7);
+  --page-gutter-lg: var(--size-24);
 
   --size-xs: 20rem;
   --size-sm: 24rem;

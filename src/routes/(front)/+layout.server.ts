@@ -1,6 +1,7 @@
+import type { ThemeState } from '$lib/site/theme.svelte';
 import { error, type ServerLoadEvent } from '@sveltejs/kit';
 
-export const load = async ({ locals, fetch }: ServerLoadEvent) => {
+export const load = async ({ locals, fetch, cookies }: ServerLoadEvent) => {
   const { rime } = locals;
 
   console.time('layout');
@@ -23,5 +24,12 @@ export const load = async ({ locals, fetch }: ServerLoadEvent) => {
     return error(404);
   }
 
-  return { nav, version };
+  const theme: ThemeState = {
+    value: (cookies.get('theme.value') || 'light') as ThemeState['value'],
+    mode: (cookies.get('theme.mode') || 'light') as ThemeState['mode']
+  };
+
+  locals.theme = theme;
+
+  return { nav, version, theme };
 };

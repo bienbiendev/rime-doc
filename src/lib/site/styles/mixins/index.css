@@ -1,11 +1,12 @@
 @define-mixin font-title {
-  font-variation-settings: 'wght' 600;
+  font-variation-settings: 'wght' 700;
   font-family: var(--font-sans);
+  letter-spacing: -0.04em;
   line-height: 1;
 }
 
 @define-mixin font-text-bold {
-  font-variation-settings: 'wght' 600;
+  font-variation-settings: 'wght' 700;
   font-family: var(--font-sans);
   line-height: 1.3;
 }

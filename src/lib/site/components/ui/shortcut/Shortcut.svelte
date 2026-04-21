@@ -10,6 +10,7 @@
 
 <style lang="postcss">
   span {
+    opacity: 0.6;
     border: 1px solid oklch(var(--light-6) 0 0);
     padding: var(--size-0-5) var(--size-1);
     font-size: var(--font-size-text-xs);

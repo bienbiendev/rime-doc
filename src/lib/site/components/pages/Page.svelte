@@ -93,7 +93,7 @@
   }
 
   main {
-    margin-top: var(--size-12);
+    margin-top: var(--size-10);
     margin-bottom: var(--size-12);
     @container (min-width:800px) {
       max-width: 800px;

@@ -5,6 +5,7 @@
   flex-direction: column;
   border-radius: var(--size-2);
   overflow: hidden;
+  border: 1px solid hsl(from var(--color-fg) h s l / 0.15);
   box-shadow: 0 10px 15px -3px #0000001a;
 }
 

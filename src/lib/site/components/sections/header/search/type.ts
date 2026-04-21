@@ -5,4 +5,5 @@ export type SearchIndex = {
   content: string;
   summary: string;
   url: string;
+  weight: number;
 }[];

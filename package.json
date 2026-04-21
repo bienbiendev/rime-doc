@@ -19,6 +19,7 @@
     "@sveltejs/adapter-auto": "^6.0.0",
     "@sveltejs/kit": "^2.57.1",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@types/js-cookie": "^3.0.6",
     "drizzle-kit": "^0.31.5",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
@@ -62,9 +63,9 @@
     "drizzle-orm": "^0.43.1",
     "highlight.js": "^11.11.1",
     "install": "^0.13.0",
-    "mode-watcher": "^1.1.0",
+    "js-cookie": "^3.0.5",
     "postcss-mixins": "^11.0.3",
-    "rimecms": "^0.26.8",
+    "rimecms": "^0.27.0",
     "sharp": "^0.34.1",
     "state": "link:@tiptap/pm/state"
   }

@@ -14,6 +14,15 @@ export default rime({
     isEnabled: () => true
   },
   siteUrl: env.PUBLIC_RIME_URL,
+  $smtp: {
+    from: process.env.RIME_SMTP_USER,
+    host: process.env.RIME_SMTP_HOST,
+    port: parseInt(process.env.RIME_SMTP_PORT || '465'),
+    auth: {
+      user: process.env.RIME_SMTP_USER,
+      password: process.env.RIME_SMTP_PASSWORD
+    }
+  },
   $routes: {
     '/api/search.json': {
       GET: async ({ locals }) => {

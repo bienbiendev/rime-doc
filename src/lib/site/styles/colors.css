@@ -39,7 +39,7 @@
   --color-ring: var(--color-primary);
 }
 
-html.dark {
+html[data-theme='dark'] {
   --color-bg: oklch(var(--light-4) 0 0);
   --color-bg--accent: oklch(var(--light-6) 0 0);
   --color-fg: oklch(var(--light-16) 0 0);

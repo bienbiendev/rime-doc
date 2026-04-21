@@ -2,6 +2,7 @@
   import { TableOfContents } from '@lucide/svelte';
   import type { JSONContent } from '@tiptap/core';
   import { richTextJSONToText } from 'rimecms/fields/rich-text';
+  import { string } from 'rimecms/util';
 
   type Props = { text: JSONContent | undefined };
   type HeadingNode = {
@@ -31,7 +32,7 @@
         .map((node, index) => ({
           label: node.content[0].text,
           level: node.attrs.level - 2,
-          id: richTextJSONToText(node).replaceAll(' ', '-').toLowerCase()
+          id: string.slugify(richTextJSONToText(node))
         }))
     ];
   });

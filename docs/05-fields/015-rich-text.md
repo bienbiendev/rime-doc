@@ -139,6 +139,22 @@ const body = richText('body').features(
 );
 ```
 
+With a custom Svelte component for rendering:
+
+```ts
+import { text, toggle } from 'rimecms/fields';
+import { fields } from 'rimecms/fields/rich-text';
+import RenderCallout from './RenderCallout.svelte';
+
+const body = richText('body').features(
+  fields({
+    name: 'callout',
+    label: 'Callout',
+    fields: [text('title'), toggle('warning')]
+  }).preview(RenderCallout)
+);
+```
+
 > [!INFO] Blocks and Trees are not currently supported as inline nodes.
 
 ## Custom features

@@ -58,7 +58,7 @@
   }
 
   :global {
-    html.dark {
+    [data-theme='dark'] {
       --code-bg: color-mix(in oklch, var(--color-bg) 92%, white);
     }
   }
