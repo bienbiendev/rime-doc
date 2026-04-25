@@ -71,26 +71,20 @@ The shape of the returned value depends on the `depth` parameter used when fetch
 ```ts
 // depth=0 (default) — unresolved reference
 {
-  author: { relationTo: 'users', documentId: 'user-id-123' }
+  author: [{ relationTo: 'users', documentId: 'user-id-123' }];
 }
 
 // depth=1 — populated document
 {
-  author: {
-    id: 'user-id-123',
-    title: 'Jane Smith',
-    _prototype: 'collection',
-    _type: 'users',
-    // ...all document fields
-  }
-}
-
-// With .many() at depth=0
-{
-  tags: [
-    { relationTo: 'tags', documentId: 'tag-id-1' },
-    { relationTo: 'tags', documentId: 'tag-id-2' }
-  ]
+  author: [
+    {
+      id: 'user-id-123',
+      title: 'Emile Zola',
+      _prototype: 'collection',
+      _type: 'users'
+      // ...all document fields
+    }
+  ];
 }
 ```
 
@@ -105,7 +99,7 @@ Returns `true` if the value is a fully populated document rather than an unresol
 ```ts
 import { isRelationResolved } from 'rimecms/fields/relation';
 
-if (isRelationResolved(doc.author)) {
+if (isRelationResolved(doc.author[0])) {
   console.log(doc.author.title);
 }
 ```
@@ -117,8 +111,8 @@ Returns `true` if the value is an unresolved reference object `{ relationTo, doc
 ```ts
 import { isRelationUnresolved } from 'rimecms/fields/relation';
 
-if (isRelationUnresolved(doc.author)) {
-  console.log(doc.author.documentId);
+if (isRelationUnresolved(doc.author[0])) {
+  console.log(doc.author[0].documentId);
 }
 ```
 

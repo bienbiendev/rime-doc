@@ -38,7 +38,7 @@ const body = richText('body').features(
   orderedList(),
   blockquote(),
   hr(),
-  upload({ slug: 'medias', query: 'where[mimeType][like]=image' })
+  upload({ source: 'medias?where[mimeType][like]=image' })
 );
 ```
 
@@ -83,7 +83,7 @@ import {
 } from 'rimecms/fields/rich-text';
 ```
 
-| Feature         | Import                            | Description                                                       |
+| Feature         | Call                              | Description                                                       |
 | --------------- | --------------------------------- | ----------------------------------------------------------------- |
 | Bold            | `bold()`                          | Bold mark                                                         |
 | Italic          | `italic()`                        | Italic mark                                                       |
@@ -93,9 +93,9 @@ import {
 | Bullet list     | `bulletList()`                    | Unordered list                                                    |
 | Ordered list    | `orderedList()`                   | Ordered list                                                      |
 | Blockquote      | `blockquote()`                    | Blockquote node                                                   |
-| Upload          | `upload({ slug, query? })`        | Embed documents from an upload collection inline                  |
-| Resource        | `resource({ slug, query? })`      | Embed a reference to any collection document inline               |
-| Fields          | `fields({ name, label, fields })` | Embed a structured set of fields as an inline node                |
+| Upload          | `upload({ source })`              | Embed documents from an upload collection                         |
+| Resource        | `resource({ source })`            | Embed a reference to any document type                            |
+| Fields          | `fields({ name, label, fields })` | Embed a structured set of fields                                  |
 
 ### upload
 
@@ -105,9 +105,7 @@ Allows editors to insert media from an upload collection directly into the conte
 import { richText } from 'rimecms/fields';
 import { upload } from 'rimecms/fields/rich-text';
 
-const body = richText('body').features(
-  upload({ slug: 'medias', query: 'where[mimeType][like]=image' })
-);
+const body = richText('body').features(upload({ source: 'medias?where[mimeType][like]=image' }));
 ```
 
 ### resource
@@ -118,7 +116,7 @@ Allows editors to insert a reference to any document inline (e.g. an internal li
 import { resource } from 'rimecms/fields/rich-text';
 
 const body = richText('body').features(
-  resource({ slug: 'pages', query: 'where[status][equals]=published' })
+  resource({ source: 'pages?where[status][equals]=published' })
 );
 ```
 

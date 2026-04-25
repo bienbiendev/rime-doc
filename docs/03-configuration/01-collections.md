@@ -1,16 +1,43 @@
 A collection is a repeatable document type, defined by its `slug`, its fields and some properties. Based on those, API endpoints, types, and panel related pages are generated. Here is an example collection :
 
 ```ts
+import { env } from '$env/dynamic/public';
 import { Collection } from '$rime/config';
-import { text, richText } from 'rimecms/fields';
-import { bold, link } from 'rimecms/fields/rich-text';
+import { richText, slug, tab, tabs, text, textarea, toggle } from 'rimecms/fields';
+import { bold, bulletList, heading, link, upload } from 'rimecms/fields/rich-text';
 
-const Posts = Collection.create('posts', {
-  fields: [
-    //
-    text('title').isTitle().required(),
-    richText('content')
-  ]
+const tabAttributes = tab('attributes')
+  .label('Attributes')
+  .fields(
+    text('title').isTitle(),
+    toggle('isHome'),
+    slug('slug')
+      .slugify('attributes.title')
+      .condition((_, siblings) => siblings.isHome === false),
+    textarea('summary')
+  );
+
+const tabContent = tab('content')
+  .label('Content')
+  .fields(
+    richText('text').features(
+      heading(2, 3, 4),
+      bold(),
+      link(),
+      bulletList(),
+      upload({ source: 'medias' })
+    )
+  );
+
+export const pages = Collection.create('pages', {
+  access: {
+    read: () => true
+  },
+  $url: (doc) =>
+    doc.attributes.isHome
+      ? `${env.PUBLIC_RIME_URL}/`
+      : `${env.PUBLIC_RIME_URL}/docs/[...parent.attributes.slug]/${doc.attributes.slug}`,
+  fields: [tabs(tabAttributes, tabContent)]
 });
 ```
 
@@ -87,7 +114,37 @@ The collection label.
 
 ### live
 
-Whether a document from the collection can be live edited. This require the `url` property to be defined.
+Whether a document from the collection can be live edited. To enable live editing, the collection must have a `$url` property defined, and `live` set to true. Then you'll need to adapt your front-end to use the consumer and provider components as follow:
+
+```svelte
+<!-- @file:src/routes/(front)/+layout.svelte -->
+<script lang="ts">
+  import { LiveProvider } from 'rimecms/live';
+  const { children } = $props();
+</script>
+
+<LiveProvider>
+  {@render children()}
+</LiveProvider>
+```
+
+```svelte
+<!-- @file:src/routes/(front)/+page.svelte -->
+<script lang="ts">
+  import { LiveConsumer } from 'rimecms/live';
+  let { data } = $props();
+</script>
+
+<LiveConsumer {data}>
+  {#snippet child(doc)}
+    <Pages {doc} nav={data.nav} />
+  {/snippet}
+</LiveConsumer>
+```
+
+The `LiveConsumer` accept an initial data object as prop which should contain the document data under the `doc` key. The `LiveConsumer` will then provide the live updated document to its child snippet, which can be used to render the page with live data.
+
+> [!NOTE] This functionnality is experimental and may change in the future.
 
 ### nested
 
