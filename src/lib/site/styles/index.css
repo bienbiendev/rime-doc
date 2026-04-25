@@ -1,5 +1,5 @@
-@import '@bien-bien/css-reset/dist/reset.css';
-@import '@bien-bien/css-sizes/dist/sizes.css';
+@import '@bienbien/css-reset/dist/reset.css';
+@import '@bienbien/css-sizes/dist/sizes.css';
 @import './shadow.css';
 @import './layout.css';
 @import './colors.css';

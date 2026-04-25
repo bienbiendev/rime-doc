@@ -9,7 +9,7 @@
 
 <div class="nav-wrapper">
   <nav>
-    {#each nav.main as group, index (group.id)}
+    {#each nav.main as group (group.id)}
       {#if group._children.length}
         <p class="nav-group-label">{group.label}</p>
         <ul>
@@ -57,16 +57,18 @@
     bottom: 0;
     width: 240px;
     overflow-y: auto;
-    gap: var(--size-1);
+    gap: var(--size-0-5);
     display: grid;
     > ul {
       margin-top: var(--size-1);
       display: grid;
-      gap: var(--size-1);
+      gap: var(--size-0-5);
     }
     :global(.button) {
-      font-size: var(--font-size-text-sm);
+      font-family: var(--font-sans);
+      /* font-size: var(--font-size-text-sm); */
       width: 100%;
+      text-transform: none;
       font-variation-settings: 'wght' 400;
       padding-left: var(--size-2);
       margin-left: calc(-1 * var(--size-2));

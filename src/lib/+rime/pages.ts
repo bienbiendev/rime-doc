@@ -28,8 +28,9 @@ import {
   heading,
   hr,
   link,
-  orederedList,
-  resource
+  orderedList,
+  resource,
+  upload
 } from 'rimecms/fields/rich-text';
 
 const refreshData = Hooks.afterUpdate(async (args) => {
@@ -79,13 +80,18 @@ export const pages = Collection.create('pages', {
             .features(
               heading(2, 3, 4),
               bold(),
-              link({ resources: [{ slug: 'pages' }] }),
+              link({ sources: ['pages'] }),
               hr(),
-              orederedList(),
+              orderedList(),
               fields({
                 name: 'text-image',
                 label: 'Text & Image',
                 fields: [text('title'), text('text'), relation('image').to('medias')]
+              }),
+              fields({
+                name: 'features',
+                label: 'Features',
+                fields: [relation('features').to('features'), relation('image').to('medias')]
               }),
               bulletList(),
               codeBlockFeature,
@@ -95,7 +101,9 @@ export const pages = Collection.create('pages', {
               infoBlockFeature,
               tagMarkFeature,
               tagWarnMarkFeature,
-              resource({ slug: 'pages' }),
+              resource({ source: 'pages' }),
+              resource({ source: 'features' }),
+              upload({ source: 'medias' }),
               tableFeature
             )
             .$beforeRead(async (value, context) => {

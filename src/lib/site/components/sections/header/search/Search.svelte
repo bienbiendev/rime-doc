@@ -9,12 +9,7 @@
   import { createSearchIndex, getOccurrences } from './search';
   import type { SearchIndex } from './type';
 
-  // , so instead of dummy add previous/next n words, it break at line breaks : like 4 words max before the occurence untile linebreak, and 8 words max after until line-break
-  // type Props = {  }
-  // const { }: Props = $props()
-
   let searchOpen = $state(false);
-  let isLoading = $state(true);
   let query = $state('');
   let pages = $state<PagesDoc[]>([]);
   let searchIndex = $state<SearchIndex>([]);
@@ -24,7 +19,6 @@
   onMount(async () => {
     pages = await fetch('/api/search.json').then((res) => res.json());
     searchIndex = createSearchIndex(pages);
-    isLoading = false;
   });
 
   function handleKeydown(e: KeyboardEvent) {
@@ -58,7 +52,7 @@
         }))
         .filter((item) => item.score > 0)
         .sort((a, b) => b.score - a.score)
-        .slice(0, 8);
+        .slice(0, 12);
 
       previousQuery = query;
     }

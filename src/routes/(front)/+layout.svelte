@@ -3,7 +3,7 @@
   import { setThemeContext } from '$lib/site/theme.svelte.js';
 
   const { children, data } = $props();
-
+  // svelte-ignore state_referenced_locally
   setThemeContext(data.theme);
 </script>
 

@@ -49,6 +49,7 @@ interface PageCreateData {
 
 interface PageUpdateData {
   _position: number;
+  _parent: string | null;
   attributes: {
     categories: string[];
   };
@@ -250,6 +251,7 @@ async function updatePage(file: FileEntry, id: string): Promise<PagesDoc> {
   const content = await markdownToJson(file.content);
   const data: PageUpdateData = {
     _position: file.position,
+    _parent: await getParent(file.parent || 'noooooope').then((parent) => parent?.id || null),
     attributes: {
       categories: file.parent ? [file.parent] : []
     },

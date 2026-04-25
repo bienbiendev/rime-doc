@@ -47,7 +47,7 @@
 
 <style type="postcss">
   :root {
-    --button-border-radius: var(--border-radius, var(--size-6));
+    --border-radius: var(--button-border-radius, var(--size-1));
   }
   .button {
     --local-space-inline: var(--space-inline, var(--size-4));
@@ -59,6 +59,8 @@
     justify-content: center;
     border-radius: var(--button-border-radius);
     white-space: nowrap;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
     transition-property:
       box-shadow, color, background-color, border-color, text-decoration-color, fill, stroke;
     transition-duration: 0.25s;
@@ -91,23 +93,23 @@
   }
 
   .button--size-sm {
-    border-radius: var(--button-border-radius, var(--size-8));
     --local-space-inline: var(--space-inline, var(--size-3));
     height: var(--size-8);
+    border-radius: var(--border-radius, var(--size-1));
     padding: var(--size-2) var(--local-space-inline);
     font-size: var(--local-font-size, var(--font-size-text-sm));
   }
 
   .button--size-lg {
-    --button-border-radius: var(--border-radius, var(--size-2));
     --local-space-inline: var(--space-inline, var(--size-8));
+    border-radius: var(--border-radius, var(--size-2));
     height: var(--size-12);
     padding: var(--size-2) var(--local-space-inline);
   }
 
   .button--size-xl {
-    --button-border-radius: var(--border-radius, var(--size-8));
     --local-space-inline: var(--space-inline, var(--size-8));
+    border-radius: var(--border-radius, var(--size-3));
     height: var(--size-14);
     padding: var(--size-2) var(--local-space-inline);
   }

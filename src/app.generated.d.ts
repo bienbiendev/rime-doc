@@ -51,6 +51,19 @@ export type MediasDoc = BaseDoc & UploadDoc &  {
 	[x: string]: unknown;
 }
 
+export type FeaturesDoc = BaseDoc &  {
+  title?: string
+	description?: string
+	scope?: ('Administration' | 'Content' | 'Developper experience')[]
+	icon?: string
+	_parent?: string
+	_position?: number
+	editedBy?: string
+	createdAt?: Date
+	updatedAt?: Date;
+	[x: string]: unknown;
+}
+
 export type Medias_directoriesDoc = BaseDoc &  {
   id: string
 	name?: string
@@ -142,6 +155,7 @@ declare module 'rimecms' {
 		'staff': StaffDoc
 		'pages': PagesDoc
 		'medias': MediasDoc
+		'features': FeaturesDoc
 		'medias_directories': Medias_directoriesDoc;
 	}
 	interface RegisterArea {

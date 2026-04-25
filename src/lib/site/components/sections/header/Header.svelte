@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/state';
   import Logo from '$lib/site/components/Logo.svelte';
   import Button from '$lib/site/components/ui/button/Button.svelte';
   import * as DropdownMenu from '$lib/site/components/ui/dropdown-menu/index.js';
@@ -23,13 +24,16 @@
 		</nav> -->
   </div>
 
-  <Search />
+  {#if page.url.pathname !== '/'}
+    <Search />
+  {/if}
 
   <div class="header__right">
     <Button
       size="icon-sm"
       variant="opacity"
       target="_blank"
+      aria-label="View on github"
       href="https://github.com/bienoubien-studio/rime"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

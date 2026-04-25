@@ -9,29 +9,7 @@
   type Props = { doc: WithRelationPopulated<PagesDoc>; version: string | null };
   const { doc, version }: Props = $props();
 
-  let scrollY = $state(0);
-  let previewImgScale = $state(1);
-
   const theme = getThemeContext();
-
-  $effect(() => {
-    initScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  });
-
-  function initScroll() {
-    window.addEventListener('scroll', handleScroll);
-  }
-
-  function handleScroll() {
-    requestAnimationFrame(onAnimationFrame);
-  }
-
-  function onAnimationFrame() {
-    scrollY = window.scrollY;
-    let scaleValue = 1 - (0.05 * scrollY) / (window.innerHeight / 2);
-    previewImgScale = Math.min(Math.max(scaleValue, 0.91), 1);
-  }
 </script>
 
 <svelte:head>
@@ -50,10 +28,7 @@
         </a>
       </aside>
       <h1>
-        {@html doc.attributes.longTitle
-          ?.replace('\n', '<br/>')
-          .replace('{', '<strong>')
-          .replace('}', '</strong>')}
+        {@html doc.attributes.longTitle?.replace('\n', '<br/>')}
       </h1>
       <p>{doc.attributes.summary}</p>
       <div>
@@ -61,10 +36,22 @@
       </div>
     </div>
   </header>
-  <div style="--scale:{previewImgScale}" class="hero__preview">
-    <img src="/rime-preview-{theme.value}.jpg" alt="preview of the admin panel" />
+
+  <div class="hero__preview">
+    <img src="/rime-preview-collection-{theme.value}.jpg" alt="preview of the admin panel" />
   </div>
 </section>
+
+<!-- {#snippet feature(node: JSONContent)}
+  {console.log(node)}
+{/snippet} -->
+
+<!-- <RenderRichText
+  json={doc.content.text}
+  components={{
+    resource: feature
+  }}
+/> -->
 
 <Features />
 
@@ -76,17 +63,18 @@
   .hero {
     margin-top: calc(-1 * var(--header-height));
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     place-content: center;
+    overflow: hidden;
   }
 
   header {
-    /* margin: var(--size-12) auto 0 auto; */
-    /* text-align: center; */
     height: 88vh;
     max-width: 700px;
-    padding-inline: var(--page-gutter-lg);
+    grid-column: span 1;
+    padding-left: var(--page-gutter-lg);
     > div {
-      place-content: end left;
+      place-content: center;
       height: 100%;
       display: grid;
       gap: var(--size-6);
@@ -96,10 +84,16 @@
   .hero__preview {
     border: 3px solid var(--color-border);
     overflow: hidden;
-    margin-inline: var(--page-gutter);
+    transform: translateX(9px);
+    margin-top: var(--size-24);
     border-radius: var(--size-3);
-    margin-top: var(--size-12);
-    transform: scale(var(--scale, 1));
+    img {
+      width: auto;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: left top;
+    }
   }
 
   aside {
@@ -112,12 +106,13 @@
   p {
     opacity: 0.6;
     max-width: 500px;
-    font-size: var(--font-size-text-xs);
+    font-family: var(--font-mono);
   }
   .hero__git {
-    border-radius: var(--size-6);
+    border-radius: var(--size-0-5);
     padding: var(--size-1) var(--size-3);
     display: inline-block;
+    text-transform: uppercase;
     border: 1px solid oklch(var(--light-10) 0 0);
     font-size: var(--font-size-text-2xs);
     font-family: 'geist-mono';

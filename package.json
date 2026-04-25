@@ -43,9 +43,9 @@
     ]
   },
   "dependencies": {
-    "@bien-bien/css-reset": "^0.1.1",
-    "@bien-bien/css-sizes": "^0.1.0",
     "@bienbien/css-fluid-text": "^0.1.1",
+    "@bienbien/css-reset": "^0.1.0",
+    "@bienbien/css-sizes": "^0.2.0",
     "@bienbien/trycatch": "^1.0.0",
     "@lucide/svelte": "^0.510.0",
     "@tiptap/core": "^3.21.0",
@@ -59,14 +59,13 @@
     "@tiptap/pm": "^3.21.0",
     "@types/node": "^22.15.17",
     "autoprefixer": "^10.4.21",
-    "bits-ui": "^2.18.0",
+    "bits-ui": "^2.8.0",
     "drizzle-orm": "^0.43.1",
     "highlight.js": "^11.11.1",
     "install": "^0.13.0",
     "js-cookie": "^3.0.5",
-    "postcss-mixins": "^11.0.3",
-    "rimecms": "^0.27.0",
-    "sharp": "^0.34.1",
-    "state": "link:@tiptap/pm/state"
+    "postcss-mixins": "^12.1.2",
+    "rimecms": "^0.27.1",
+    "sharp": "^0.34.1"
   }
 }

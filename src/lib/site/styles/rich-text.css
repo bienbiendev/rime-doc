@@ -98,4 +98,12 @@
   .card-resource {
     margin-block: var(--size-4);
   }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-text-sm);
+  }
+  p {
+    margin-block: var(--size-2);
+  }
 }

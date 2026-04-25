@@ -12,7 +12,7 @@
   <ul>
     {#each home.features as feature, index (index)}
       <li>
-        <CardFeature {index} {...feature} />
+        <CardFeature {...feature} />
       </li>
     {/each}
   </ul>
@@ -36,6 +36,7 @@
   }
 
   .features {
+    border-top: 1px solid var(--color-border);
     display: grid;
     gap: var(--size-12);
     grid-template-columns: var(--section-gutter) 1fr var(--section-gutter);
