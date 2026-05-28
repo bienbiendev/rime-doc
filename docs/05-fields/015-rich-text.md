@@ -1,3 +1,5 @@
+<!-- Summary: A TipTap-powered rich text editor field storing content as ProseMirror JSON with configurable toolbar extensions. -->
+
 A rich text editor field powered by [TipTap](https://tiptap.dev). The value is stored as a TipTap/ProseMirror JSON document and automatically serialized to/from the database.
 
 ```ts

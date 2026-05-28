@@ -29,6 +29,7 @@ export default rime({
       GET: async ({ locals }) => {
         const pages = await locals.rime.collection('pages').find({
           select: [
+            'attributes.title',
             'attributes.longTitle',
             'content.text',
             'url',
@@ -41,4 +42,4 @@ export default rime({
       }
     }
   }
-});
+} as const);

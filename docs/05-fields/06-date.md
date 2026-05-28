@@ -1,3 +1,5 @@
+<!-- Summary: A date input field that stores a date string value. -->
+
 A date input field.
 
 ```ts

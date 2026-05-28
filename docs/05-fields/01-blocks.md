@@ -1,3 +1,5 @@
+<!-- Summary: A blocks field that lets editors compose content from typed blocks, each with its own set of fields, ideal for flexible page layouts. -->
+
 A blocks field lets editors compose content from a list of typed blocks, each with its own set of fields. This is ideal for building flexible page layouts or complex content structures.
 
 ```ts

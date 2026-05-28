@@ -1,3 +1,5 @@
+<!-- Summary: A field to reference one or more documents from another collection or area, with support for depth-based population. -->
+
 A field that creates a reference to one or more documents in another collection or area. At `depth=0` the value contains relation metadata; at `depth>=1` the referenced documents are fully populated.
 
 ```ts

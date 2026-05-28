@@ -1,3 +1,5 @@
+<!-- Summary: A structural field that groups related fields under a named key in the document without adding extra nesting to the data. -->
+
 A structural field that groups related fields under a single named key in the document. The group itself stores no value — its child fields are stored flat under the group's name.
 
 ```ts

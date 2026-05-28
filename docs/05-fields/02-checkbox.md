@@ -1,3 +1,5 @@
+<!-- Summary: A checkbox input field that stores a boolean value. -->
+
 A checkbox input field.
 
 ```ts

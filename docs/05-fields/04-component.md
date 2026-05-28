@@ -1,3 +1,5 @@
+<!-- Summary: A field for embedding a custom Svelte component inside the panel editor. -->
+
 Display a custom component.
 
 ```ts

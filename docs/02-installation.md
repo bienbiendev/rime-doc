@@ -1,3 +1,5 @@
+<!-- Summary: Step-by-step guide to install and set up Rime in a SvelteKit project. -->
+
 1. Create a SvelteKit project if not already done :
 
    ```bash

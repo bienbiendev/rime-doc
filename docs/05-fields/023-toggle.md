@@ -1,3 +1,5 @@
+<!-- Summary: A toggle switch input field that stores a boolean value. -->
+
 A toggle input field.
 
 ```ts

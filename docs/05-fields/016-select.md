@@ -1,3 +1,5 @@
+<!-- Summary: A selection field rendered as an inline tag list, supporting single or multiple values via the .many() modifier. -->
+
 A selection field that supports both single and multiple values, rendered as an inline tag list. Use `.many()` to allow multiple selections.
 
 ```ts

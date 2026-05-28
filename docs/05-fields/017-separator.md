@@ -1,3 +1,5 @@
+<!-- Summary: A visual separator field for organizing the panel editor without storing any data. -->
+
 Display a simple separator.
 
 ```ts

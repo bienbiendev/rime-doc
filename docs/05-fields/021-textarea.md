@@ -1,3 +1,5 @@
+<!-- Summary: A multi-line textarea input field for longer plain text content. -->
+
 A simple textarea field.
 
 ```ts

@@ -1,3 +1,5 @@
+<!-- Summary: A simple single-line text input field with optional validation and formatting options. -->
+
 A simple text input field.
 
 ```ts

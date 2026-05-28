@@ -1,3 +1,5 @@
+<!-- Summary: Use lifecycle hooks to intercept and control read, create, update, and delete operations on your collections and areas. -->
+
 Rime provides various hooks that allow you to control operations throughout your application. Here's how you create a basic hook:
 
 ```ts

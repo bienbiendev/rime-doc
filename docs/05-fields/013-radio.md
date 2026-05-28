@@ -1,3 +1,5 @@
+<!-- Summary: A single-value selection field rendered as inline radio buttons, similar to combobox but always visible. -->
+
 A single-value selection field rendered as a group of radio buttons. Similar to `combobox` but always visible — options are displayed inline rather than behind a popover.
 
 ```ts

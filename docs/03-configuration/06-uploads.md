@@ -1,3 +1,5 @@
+<!-- Summary: Enable and configure file upload capabilities on a Rime collection, including storage and allowed MIME types. -->
+
 To enable file upload capabilities on a collection :
 
 ```ts

@@ -1,4 +1,6 @@
-API are how you interact with your data, in addition to the auto-generated [REST API](/docs/04-api/01-rest-api.md), you have access server-side to the rime api which let you apply changes on your data.
+<!-- Summary: Overview of Rime's data access layer: auto-generated REST endpoints and the server-side Rime API. -->
+
+API are how you interact with your data, in addition to the auto-generated [REST API](/docs/04-api/01-rest-api.md), you have access server-side to the [rime api](/docs/04-api/02-rime-api.md) which provides a more flexible and powerful way to query your data, with support for relations, areas, and more.
 
 ## Rest API
 

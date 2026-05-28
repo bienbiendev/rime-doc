@@ -1,3 +1,5 @@
+<!-- Summary: A time input field that stores a time string value. -->
+
 A time input field.
 
 ```ts

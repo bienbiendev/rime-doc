@@ -27,6 +27,7 @@ export function createSearchIndex(pages: PagesDoc[]): SearchIndex {
       }
     } catch {
       // skip malformed content
+      console.warn(`Failed to parse content for page ${page.id}`);
     }
 
     // Page-level entry: all content minus codeBlocks

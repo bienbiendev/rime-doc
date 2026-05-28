@@ -1,3 +1,5 @@
+<!-- Summary: Server-side Rime API available via event.locals.rime for querying data with relation population, area support, and more. -->
+
 The Rime API is the server-side interface for interacting with your data. It is available on `event.locals.rime` in any SvelteKit server context — load functions, form actions, hooks, and API routes.
 
 ```ts

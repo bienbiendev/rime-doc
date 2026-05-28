@@ -1,3 +1,5 @@
+<!-- Summary: A presentational field that groups other fields into tabbed panels without adding extra nesting to the stored data. -->
+
 A purely presentational field that groups other fields into tabbed panels. Tabs store no data — all fields defined inside tabs are stored at the document root level, just as if they were defined directly on the collection.
 
 ```ts

@@ -1,3 +1,5 @@
+<!-- Summary: Overview of all available Rime field types and their shared configuration methods for defining document structure. -->
+
 Fields are the way you define the structure of your documents. From simple text to nested arrays, blocks, rich-text, relations, and more, Rime provides a wide variety of fields to customize your content. If you need more functionality, creating custom fields is also possible.
 
 Example field definition for a `posts` collection:

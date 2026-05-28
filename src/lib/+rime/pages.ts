@@ -76,6 +76,7 @@ export const pages = Collection.create('pages', {
       tab('content')
         .label('Content')
         .fields(
+          richText('intro').condition((doc) => doc.attributes.isHome === true),
           richText('text')
             .features(
               heading(2, 3, 4),
@@ -109,11 +110,25 @@ export const pages = Collection.create('pages', {
             .$beforeRead(async (value, context) => {
               if (typeof value === 'object' && 'content' in value && Array.isArray(value.content)) {
                 for (const node of value.content) {
-                  if (node.type === 'resource' && node.attrs?.id) {
+                  if (
+                    node.type === 'rich-text-fields-features' &&
+                    node.attrs?.json?.features[0]?.documentId
+                  ) {
+                    // Populate Features
+                    const [document] = await context.event.locals.rime.collection('features').find({
+                      query: `where[id][equals]=${node.attrs.json.features[0].documentId}`,
+                      depth: 1
+                    });
+                    if (document) {
+                      node.feature = document;
+                    }
+                  } else if (node.type === 'resource' && node.attrs?.id) {
+                    // Populate Resources
                     const [document] = await context.event.locals.rime.collection('pages').find({
                       query: `where[id][equals]=${node.attrs.id}`,
                       select: [
                         'url',
+                        'attributes.title',
                         'attributes.longTitle',
                         'attributes.summary',
                         'attributes.icon'

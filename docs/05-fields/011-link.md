@@ -1,3 +1,5 @@
+<!-- Summary: A link field supporting URL, email, phone, anchor, and document relation types, with optional target and resolved URL. -->
+
 A link field that supports multiple link types: URL, email, phone, anchor, or a reference to a collection or area resource. The stored value includes the type, the raw value, the resolved URL, and an optional target.
 
 ```ts

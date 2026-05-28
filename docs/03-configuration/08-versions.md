@@ -1,3 +1,5 @@
+<!-- Summary: Enable document versioning and draft/publish workflows on collections and areas to track content history. -->
+
 Rime has a built-in versioning system that keeps a history of every change made to a document. It can also be used to enable a **draft / publish workflow**.
 
 Versions can be enabled on both collections and areas with the `versions` property:

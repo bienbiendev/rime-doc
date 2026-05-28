@@ -3,11 +3,16 @@
   import Button from '$lib/site/components/ui/button/Button.svelte';
 
   import { getThemeContext } from '$lib/site/theme.svelte';
+  import { RenderRichText } from 'rimecms/fields/rich-text';
   import type { WithRelationPopulated } from 'rimecms/types';
   import Features from './Features.svelte';
 
-  type Props = { doc: WithRelationPopulated<PagesDoc>; version: string | null };
-  const { doc, version }: Props = $props();
+  type Props = {
+    doc: WithRelationPopulated<PagesDoc>;
+    version: string | null;
+    features: FeaturesDoc[];
+  };
+  const { doc, version, features }: Props = $props();
 
   const theme = getThemeContext();
 </script>
@@ -42,18 +47,11 @@
   </div>
 </section>
 
-<!-- {#snippet feature(node: JSONContent)}
-  {console.log(node)}
-{/snippet} -->
+<div class="intro">
+  <RenderRichText json={doc.content.intro} />
+</div>
 
-<!-- <RenderRichText
-  json={doc.content.text}
-  components={{
-    resource: feature
-  }}
-/> -->
-
-<Features />
+<Features {features} />
 
 <style lang="postcss">
   :root {
@@ -66,6 +64,17 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     place-content: center;
     overflow: hidden;
+    margin-bottom: var(--section-space-y);
+  }
+
+  .intro {
+    padding: var(--page-gutter-lg);
+    font-size: var(--font-size-headline-md);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    > :global(p) {
+      max-width: 700px;
+    }
   }
 
   header {

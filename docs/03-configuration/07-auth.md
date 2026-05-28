@@ -1,3 +1,5 @@
+<!-- Summary: Configure authentication for staff panel users and collection-level user accounts using Better Auth. -->
+
 Rime's authentication is built on [Better Auth](https://better-auth.com). It covers two distinct concerns: **staff** (panel users) and **collection auth** (user-facing accounts).
 
 ## Staff

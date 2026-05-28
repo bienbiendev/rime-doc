@@ -1,3 +1,5 @@
+<!-- Summary: A numeric input field with configurable min, max, step, and default value. -->
+
 A numeric input field. The stored value is always a JavaScript `number`. A default value of `0` is used if not specified and no `min` is set; otherwise the `min` value becomes the default.
 
 ```ts

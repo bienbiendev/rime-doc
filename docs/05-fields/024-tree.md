@@ -1,3 +1,5 @@
+<!-- Summary: A hierarchical list field for building nested structures like navigation menus or categories, where each row has custom fields and children. -->
+
 A hierarchical list field where each row contains custom fields and can have nested children. Used for things like navigation menus, nested categories, or any ordered tree structure.
 
 ```ts

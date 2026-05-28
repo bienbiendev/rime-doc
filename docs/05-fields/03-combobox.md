@@ -1,3 +1,5 @@
+<!-- Summary: A searchable popover selection field for picking a single value, with optional per-option icons. -->
+
 A single-value selection field rendered as a searchable popover. Unlike `select`, it only allows picking one value and supports optional icons per option.
 
 ```ts

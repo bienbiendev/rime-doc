@@ -1,3 +1,5 @@
+<!-- Summary: Learn how to define collections — repeatable document types that generate API endpoints, TypeScript types, and panel pages. -->
+
 A collection is a repeatable document type, defined by its `slug`, its fields and some properties. Based on those, API endpoints, types, and panel related pages are generated. Here is an example collection :
 
 ```ts

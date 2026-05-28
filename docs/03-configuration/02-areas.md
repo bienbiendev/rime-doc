@@ -1,3 +1,5 @@
+<!-- Summary: Learn how to define areas — singleton document types that generate API endpoints, TypeScript types, and panel pages. -->
+
 An area is a singleton document type, defined by its `slug`, its fields and some properties. Based on those, API endpoints, types, and panel related pages are generated. Here is an example area :
 
 ```ts

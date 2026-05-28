@@ -1,3 +1,5 @@
+<!-- Summary: A text input field with built-in email format validation. -->
+
 A text input field with email validation function.
 
 ```ts

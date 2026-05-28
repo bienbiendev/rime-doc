@@ -1,3 +1,5 @@
+<!-- Summary: Overview of all Rime configuration options: adapters, collections, areas, authentication, custom routes, panel settings, and more. -->
+
 If you’ve followed the [installation](/docs/02-installation.md) steps correctly, you should already have a `pages` collection and the `$adapter` property set up.
 
 The configuration is the core of **Rime**, this is where you configure how your documents will be structured, localization, panel access, custom API routes and [more](#properties)… The configuration entry **must be located at **`src/lib/+rime/rime.config.ts`. Here is a basic configuration example :
@@ -198,12 +200,38 @@ export default rime({
 Panel access options and specific properties.
 
 ```ts
+import { SettingsIcon } from '@lucide/svelte';
+import CustomDashboard from './CustomDashboard.svelte';
+import CustomHeader from './CustomHeader.svelte';
+import CustomPage from './CustomPage.svelte';
+
 export default rime({
   //...
   panel: {
+    /** Who can access the panel */
     $access: (user) => !!user && user.roles.includes('admin'),
-    fields: [text('website')],
-    css: '/panel/custom.css'
+    /** Panel UI language, 'en' or 'fr' */
+    language: 'en',
+    /** Path to a custom CSS file (relative to the static directory, or external URL) */
+    css: '/panel/custom.css',
+    /** Sidebar navigation group labels and icons */
+    navigation: {
+      groups: [{ label: 'Content', icon: SettingsIcon }]
+    },
+    /** Custom panel pages */
+    routes: {
+      '/panel/custom-page': {
+        label: 'Custom page',
+        icon: SettingsIcon,
+        group: 'Content',
+        component: CustomPage
+      }
+    },
+    /** Slot-in custom Svelte components */
+    components: {
+      header: [CustomHeader],
+      dashboard: CustomDashboard
+    }
   }
 });
 ```
@@ -217,6 +245,19 @@ export default rime({
   //...
   custom: {
     colorList: ['orange', 'blue']
+  }
+});
+```
+
+### $custom
+
+Custom config available server-side only with `locals.rime.config.raw.$custom`.
+
+```ts
+export default rime({
+  //...
+  $custom: {
+    apiKey: '12345'
   }
 });
 ```

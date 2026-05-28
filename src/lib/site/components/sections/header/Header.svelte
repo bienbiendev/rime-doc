@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { page } from '$app/state';
   import Logo from '$lib/site/components/Logo.svelte';
   import Button from '$lib/site/components/ui/button/Button.svelte';
@@ -15,7 +16,7 @@
 
 <header class:header--border={border}>
   <div class="header__left">
-    <a href="/">
+    <a href={resolve('/')}>
       <Logo />
     </a>
 

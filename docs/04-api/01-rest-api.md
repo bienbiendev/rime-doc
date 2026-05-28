@@ -1,3 +1,5 @@
+<!-- Summary: Reference for the auto-generated REST API endpoints for collections and areas, including filtering, pagination, and depth. -->
+
 Rime auto-generates REST API endpoints for every collection and area defined in your configuration. All endpoints are prefixed with `/api`.
 
 ## Collections

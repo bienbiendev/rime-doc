@@ -12,7 +12,7 @@ import {
   ShieldUser,
   TextCursorInput
 } from '@lucide/svelte';
-import { combobox, select, text } from 'rimecms/fields';
+import { combobox, group, relation, select, text } from 'rimecms/fields';
 
 export const features = Collection.create('features', {
   panel: {
@@ -21,7 +21,6 @@ export const features = Collection.create('features', {
   access: {
     read: () => true
   },
-  nested: true,
   fields: [
     text('title').isTitle(),
     text('description'),
@@ -38,6 +37,7 @@ export const features = Collection.create('features', {
       { value: 'Server', label: 'Server', icon: Server },
       { value: 'Settings', label: 'Settings', icon: Settings },
       { value: 'TextCursorInput', label: 'TextCursorInput', icon: TextCursorInput }
-    )
+    ),
+    group('previews').fields(relation('light').to('medias'), relation('dark').to('medias'))
   ]
 });

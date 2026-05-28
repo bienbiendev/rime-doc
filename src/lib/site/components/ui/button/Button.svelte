@@ -52,7 +52,7 @@
   .button {
     --local-space-inline: var(--space-inline, var(--size-4));
     --local-color: var(--color, unset);
-    --local-font-size: var(--font-size, var(--font-size-text-md));
+    --local-font-size: var(--font-size, var(--font-size-text-sm));
     flex-shrink: var(--flex-shrink, unset);
     display: inline-flex;
     align-items: center;

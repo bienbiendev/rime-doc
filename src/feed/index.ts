@@ -40,6 +40,7 @@ interface PageCreateData {
     title: string;
     slug: string;
     longTitle: string;
+    summary: string;
   };
   content: {
     text: any;
@@ -52,10 +53,23 @@ interface PageUpdateData {
   _parent: string | null;
   attributes: {
     categories: string[];
+    summary: string;
   };
   content: {
     text: any;
   };
+}
+
+/**
+ * Extracts the summary from a <!-- Summary: ... --> comment at the top of the file.
+ * Returns the summary string and the content with the comment removed.
+ */
+function extractSummary(content: string): { summary: string; content: string } {
+  const match = content.match(/^<!--\s*Summary:\s*(.*?)\s*-->\r?\n?/);
+  if (match) {
+    return { summary: match[1], content: content.slice(match[0].length) };
+  }
+  return { summary: '', content };
 }
 
 /**
@@ -204,14 +218,16 @@ async function createPage(file: FileEntry): Promise<string> {
     if (!parent) throw new Error(`Parent ${file.parent} don't exists`);
   }
 
-  const content = await markdownToJson(file.content);
+  const { summary, content: strippedContent } = extractSummary(file.content);
+  const content = await markdownToJson(strippedContent);
 
   const baseData: PageCreateData = {
     _position: file.position,
     attributes: {
       title: capitalize(file.slug),
       slug: file.slug,
-      longTitle: capitalize(file.slug)
+      longTitle: capitalize(file.slug),
+      summary
     },
     content: {
       text: content
@@ -248,12 +264,14 @@ async function getNav(): Promise<NavDoc> {
  * Updates an existing page
  */
 async function updatePage(file: FileEntry, id: string): Promise<PagesDoc> {
-  const content = await markdownToJson(file.content);
+  const { summary, content: strippedContent } = extractSummary(file.content);
+  const content = await markdownToJson(strippedContent);
   const data: PageUpdateData = {
     _position: file.position,
     _parent: await getParent(file.parent || 'noooooope').then((parent) => parent?.id || null),
     attributes: {
-      categories: file.parent ? [file.parent] : []
+      categories: file.parent ? [file.parent] : [],
+      summary
     },
     content: {
       text: content

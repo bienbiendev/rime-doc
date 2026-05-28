@@ -1,10 +1,11 @@
 <script lang="ts">
+  import type { ResolvedPathname } from '$app/types';
   import { ChevronLeft, ChevronRight } from '@lucide/svelte';
 
   type Props = {
     title: string;
     description?: string;
-    link: string;
+    link: ResolvedPathname;
     direction?: 'ltr' | 'rtl';
     align?: 'left' | 'right';
   };

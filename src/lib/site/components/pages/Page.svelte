@@ -25,7 +25,8 @@
 </script>
 
 <svelte:head>
-  <title>{doc.title} -</title>
+  <title>{doc.title} - Rime CMS</title>
+  <meta name="description" content={doc.attributes.summary} />
 </svelte:head>
 
 <Header border={true} />

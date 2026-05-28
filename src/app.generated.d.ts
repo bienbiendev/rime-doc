@@ -28,7 +28,8 @@ export type PagesDoc = BaseDoc &  {
 		summary?: string,
 		categories?: ('fields' | 'configuration' | 'guides' | 'api')[],
 		icon?: string},
-	content: {text?: import('@tiptap/core').JSONContent}
+	content: {intro?: import('@tiptap/core').JSONContent,
+		text?: import('@tiptap/core').JSONContent}
 	_parent?: string
 	_position?: number
 	url?: string
@@ -56,8 +57,8 @@ export type FeaturesDoc = BaseDoc &  {
 	description?: string
 	scope?: ('Administration' | 'Content' | 'Developper experience')[]
 	icon?: string
-	_parent?: string
-	_position?: number
+	previews: {light?: RelationValue<MediasDoc>,
+	dark?: RelationValue<MediasDoc>}
 	editedBy?: string
 	createdAt?: Date
 	updatedAt?: Date;

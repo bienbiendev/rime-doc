@@ -1,3 +1,5 @@
+<!-- Summary: A slug input field for generating URL-friendly identifiers, optionally synced to another field. -->
+
 A slug input field.
 
 ```ts
