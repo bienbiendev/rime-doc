@@ -121,7 +121,7 @@ Whether a document from the collection can be live edited. To enable live editin
 ```svelte
 <!-- @file:src/routes/(front)/+layout.svelte -->
 <script lang="ts">
-  import { LiveProvider } from 'rimecms/live';
+  import { LiveProvider } from 'rimecms';
   const { children } = $props();
 </script>
 
@@ -133,20 +133,81 @@ Whether a document from the collection can be live edited. To enable live editin
 ```svelte
 <!-- @file:src/routes/(front)/+page.svelte -->
 <script lang="ts">
-  import { LiveConsumer } from 'rimecms/live';
+  import { LiveEdit } from 'rimecms';
   let { data } = $props();
 </script>
 
-<LiveConsumer {data}>
-  {#snippet child(doc)}
-    <Pages {doc} nav={data.nav} />
+<LiveEdit path="attributes.title" data={data.doc.attributes.title}>
+  {#snippet child(title, props)}
+    <h1 {...props}>{title}</h1>
   {/snippet}
-</LiveConsumer>
+</LiveEdit>
 ```
 
-The `LiveConsumer` accept an initial data object as prop which should contain the document data under the `doc` key. The `LiveConsumer` will then provide the live updated document to its child snippet, which can be used to render the page with live data.
+The `LiveEdit` component will automatically subscribe to the document changes and update the content in real time. The `path` prop is the path to the field from the document data root, and the `data` prop is the initial value of the field. The `LiveEdit` component will also provide a `props` object to the child component, which contains the necessary props to allow your wrapper to toggle the live panel.
 
-> [!NOTE] This functionnality is experimental and may change in the future.
+An update prop can be passed to edit any other resource than the document itself. For example, if you want to edit a `footer` area at `/api/footer` in a page, you can do it like this:
+
+```svelte
+<LiveEdit path="title" update="/footer" data={data.footer.title}>
+  {#snippet child(title, props)}
+    <h3 {...props}>{title}</h3>
+  {/snippet}
+</LiveEdit>
+```
+
+By default the `update` prop will use the `data.doc` as the resource to update, be sure to provide the `data.doc` from your page data. The path prop by default is `""` mapping to the root of the document data. This provides the whole document form on the sidepanel.
+
+```svelte
+<LiveEdit path="" update="/{data.doc._type}/{data.doc._id}" data={data.doc}>
+  {#snippet child(doc, props)}
+    <h1 {...props}>{doc.attributes.title}</h1>
+  {/snippet}
+</LiveEdit>
+
+<!-- Is equivalent to -->
+<LiveEdit>
+  {#snippet child(doc: PagesDoc, props)}
+    <h1 {...props}>{doc.attributes.title}</h1>
+  {/snippet}
+</LiveEdit>
+```
+
+`LiveEdit` components can also be nested.
+
+```svelte
+<LiveEdit data={data.doc}>
+  {#snippet child(doc, props)}
+    <section {...props}>
+      <h1>{doc.attributes.title}</h1>
+
+      <LiveEdit path="attributes.summary" data={doc.attributes.summary}>
+        {#snippet child(summary, props)}
+          <p {...props}>{summary}</p>
+        {/snippet}
+      </LiveEdit>
+
+      <!-- This allows a whole blocks field to be editable -->
+      <LiveEdit path="layout.sections" data={doc.layout.sections}>
+        {#snippet child(sections, props)}
+          <div {...props}>
+            {#each sections as block, index}
+              <!-- This allows a single block to be editable -->
+              <LiveEdit path="layout.sections.{index}:{block.type}" data={block}>
+                {#snippet child(block, props)}
+                  <div {...props}>{block.text}</div>
+                {/snippet}
+              </LiveEdit>
+            {/each}
+          </div>
+        {/snippet}
+      </LiveEdit>
+    </section>
+  {/snippet}
+</LiveEdit>
+```
+
+> [!NOTE] This functionality is experimental.
 
 ### nested
 

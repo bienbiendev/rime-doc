@@ -243,4 +243,57 @@ The `metas` argument passed to the validation method:
 
 ## Define your own field
 
-Documentation in progress
+For a quick one-off input with no data binding, use the [component field](/docs/05-fields/04-component.md). For a real, reusable field type — its own stored value, validation, default value, usable anywhere in a `fields: [...]` array just like `text` or `select` — extend `FieldBuilder` (presentational, like `separator`/`tabs`) or `FormFieldBuilder` (data-bearing, like every other field), both exported from `rimecms/fields`. The panel chrome (`Field.fieldset`, `Field.Label`, `Field.Hint`, `Field.Error`) is exported from `rimecms/panel`; bind the field's value in your component with `form.useField(path, config)`, same as every built-in field.
+
+A `FormFieldBuilder` subclass overrides:
+
+### dataType
+
+The storage primitive used to generate the database column: `text`, `boolean`, `number`, `timestamp` or `json`. No adapter-specific code is needed.
+
+### component
+
+The Svelte component rendered in the panel. Receives `{ path, config, form }`.
+
+### cell
+
+Optional. The component rendered inside a collection list row when the field is added as a column via [`.table()`](#table). Receives just `{ value }`; without it the column falls back to rendering the raw value.
+
+### generateType
+
+Feeds the field's contribution to the generated document type (`$lib/app.generated.d.ts`) — a `name: TsType` (or `name?: TsType` when not required) fragment. `FormFieldBuilder`'s own default already returns `` `${name}${required ? '' : '?'}: any` `` if left unoverridden, so a field is never silently missing from the generated type. It's `protected` — only reachable via `.use.generateType()`, so calling it directly from a `fields: [...]` array is a compile error, not an accident waiting to happen.
+
+Container fields recurse into their children with `child.use.generateType()`: `group`/`tabs` nest the result under their own name, `blocks`/`tree` instead reference a separately generated `Block<Name>`/`Tree<Name>` type.
+
+### compile()
+
+Rarely needs overriding — the base `FieldBuilder.compile()` already turns `this.field` into plain data plus `component`/`cell`. Only override it if your field holds nested field builders that must themselves be compiled, the way `group`, `tabs`, `blocks` and `tree` do for their child fields.
+
+### Shared hooks with different server and client behavior
+
+A shared hook (`FieldHookShared`, e.g. `beforeValidate`) can run different code on the server vs. the browser. Split it into two files in the field's own folder — `module.ts` for the client version, `module.server.ts` for the server version — both exporting the **same** name, then import it in your field via `$rime/fields/<name>` instead of a relative path; the right file gets picked automatically depending on where the code runs.
+
+`link` uses this to resolve a linked document's URL — a no-op in the browser, a real lookup on the server:
+
+```ts
+// @file:src/lib/fields/link/module.ts (client)
+export const populateResourceURL = async (link) => link;
+```
+
+```ts
+// @file:src/lib/fields/link/module.server.ts (server)
+export const populateResourceURL = async (link) => {
+  const doc = await findLinkedDocumentServer(link.value);
+  link.url = doc.url;
+  return link;
+};
+```
+
+```ts
+// @file:src/lib/fields/link/index.ts
+import { populateResourceURL } from '$rime/fields/link';
+```
+
+Both files must exist for `$rime/fields/<name>` to resolve — don't add either unless you actually need the split.
+
+See the [custom field definition guide](/docs/06-guide/01-custom-field-definition.md) for a full walkthrough building one.

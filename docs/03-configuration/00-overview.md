@@ -8,7 +8,7 @@ The configuration is the core of **Rime**, this is where you configure how your 
 // @file:src/lib/+rime/rime.config.ts
 import { rime, Collection } from '$rime/config';
 import { text } from 'rimecms/fields';
-import { sqliteAdapter } from 'rimecms/sqlite'
+import { sqliteAdapter } from 'rimecms/adapter-sqlite'
 
 const Pages = Collection.create('pages', {
   fields: [

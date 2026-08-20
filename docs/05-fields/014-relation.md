@@ -125,5 +125,6 @@ Fetches and returns the full document for an unresolved relation. If the value i
 ```ts
 import { resolveRelation } from 'rimecms/fields/relation';
 
-const author = await resolveRelation<UserDoc>(doc.author);
+// For a relation typed as RelationValue<UserDoc>, when resolved it will return a UserDoc.
+const author = await resolveRelation(doc.author);
 ```

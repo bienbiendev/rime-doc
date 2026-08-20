@@ -95,7 +95,7 @@ You can now visit the `/panel`, in which there will be nothing more than the bas
    // @file:src/lib/+rime/rime.config.ts
    import { rime, Collection } from '$rime/config';
    import { text } from 'rimecms/fields';
-   import { sqliteAdapter } from 'rimecms/sqlite';
+   import { sqliteAdapter } from 'rimecms/adapter-sqlite';
 
    const Pages = Collection.create('pages', {
      fields: [text('title').isTitle().required()]

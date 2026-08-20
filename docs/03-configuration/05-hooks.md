@@ -62,22 +62,17 @@ import { Area } from '$rime/config';
 const Settings = Area.create('settings', {
   //...
   $hooks: {
-    beforeRead: [
-      /** */
-    ],
-    beforeUpdate: [
-      /** */
-    ],
-    afterUpdate: [
-      /** */
-    ]
+    beforeOperation: [],
+    beforeRead: [],
+    beforeUpdate: [],
+    afterUpdate: []
   }
 });
 ```
 
 ## Collection Hooks
 
-Collections support a comprehensive set of hooks: `beforeOperation`, `beforeCreate`, `beforeRead`, `beforeUpdate`, `beforeDelete`, `afterCreate`, `afterUpdate`, and `afterDelete`:
+Collections support a comprehensive set of hooks: `beforeCreate`, `beforeRead`, `beforeUpdate`, `beforeDelete`, `afterCreate`, `afterUpdate`, and `afterDelete`:
 
 ```ts
 import { Collection, Hooks } from '$rime/config';
