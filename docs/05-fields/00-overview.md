@@ -54,6 +54,14 @@ const posts = Collection.create('posts', {
 
 All non-presentational fields (all except `separator`, `component` and `tabs` fields) share the following methods:
 
+| Hook | Runs |
+| --- | --- |
+| `$beforeRead` | server |
+| `$beforeSave` | server |
+| `beforeValidate` | client + server |
+| `validate` | client + server |
+| `onChange` | client |
+
 ### $beforeRead {{server only}}
 
 Field hook triggered before a read operation.
@@ -269,31 +277,50 @@ Container fields recurse into their children with `child.use.generateType()`: `g
 
 Rarely needs overriding — the base `FieldBuilder.compile()` already turns `this.field` into plain data plus `component`/`cell`. Only override it if your field holds nested field builders that must themselves be compiled, the way `group`, `tabs`, `blocks` and `tree` do for their child fields.
 
-### Shared hooks with different server and client behavior
+### A hook needing server-only code
 
-A shared hook (`FieldHookShared`, e.g. `beforeValidate`) can run different code on the server vs. the browser. Split it into two files in the field's own folder — `module.ts` for the client version, `module.server.ts` for the server version — both exporting the **same** name, then import it in your field via `$rime/fields/<name>` instead of a relative path; the right file gets picked automatically depending on where the code runs.
-
-`link` uses this to resolve a linked document's URL — a no-op in the browser, a real lookup on the server:
+`$beforeRead`/`$beforeSave` need real server access (`event.locals.rime`) — keep that code out of the client bundle with a `module.server.ts`:
 
 ```ts
-// @file:src/lib/fields/link/module.ts (client)
-export const populateResourceURL = async (link) => link;
-```
-
-```ts
-// @file:src/lib/fields/link/module.server.ts (server)
-export const populateResourceURL = async (link) => {
-  const doc = await findLinkedDocumentServer(link.value);
-  link.url = doc.url;
-  return link;
+// @file:src/lib/fields/color/module.server.ts
+export const logSave: FieldHook = async (value, ctx) => {
+  await ctx.event.locals.rime.collection('auditLog').create({ data: { field: 'color', value } });
+  return value;
 };
 ```
 
 ```ts
-// @file:src/lib/fields/link/index.ts
-import { populateResourceURL } from '$rime/fields/link';
+// @file:src/lib/fields/color/index.ts
+import { logSave } from '$rime/modules';
+// this.field.hooks = { beforeSave: [logSave] };
 ```
 
-Both files must exist for `$rime/fields/<name>` to resolve — don't add either unless you actually need the split.
+See [Isomorphic modules](/docs/06-guide/02-isomorphic-modules.md).
+
+### A hook needing different client/server behavior
+
+`beforeValidate` runs on both sides — split it when the real check only makes sense server-side (e.g. a uniqueness check against the database), with a lighter client-side stand-in:
+
+```ts
+// @file:src/lib/fields/color/module.ts
+export const checkUnique: FieldHookShared = async (value) => value;
+```
+
+```ts
+// @file:src/lib/fields/color/module.server.ts
+export const checkUnique: FieldHookShared = async (value, ctx) => {
+  const existing = await ctx.event.locals.rime.collection('pages').find({ where: { color: value } });
+  if (existing.length) throw new Error('Color already used');
+  return value;
+};
+```
+
+```ts
+// @file:src/lib/fields/color/index.ts
+import { checkUnique } from '$rime/modules';
+// this.field.hooks = { beforeValidate: [checkUnique] };
+```
+
+See [Isomorphic modules](/docs/06-guide/02-isomorphic-modules.md).
 
 See the [custom field definition guide](/docs/06-guide/01-custom-field-definition.md) for a full walkthrough building one.

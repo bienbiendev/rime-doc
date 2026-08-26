@@ -1,24 +1,30 @@
-<!-- Summary: Rime is a headless CMS built on SvelteKit focused on flexibility, ease of configuration, and developer experience. -->
+<!-- Summary: Rime is a developer-focused headless CMS for the Svelte ecosystem. -->
 
-**Rime** is a headless CMS built on top of **SvelteKit**, designed with a focus on flexibility, ease of configuration, user-friendly administration, and performance. It’s made for developers who want to concentrate on creativity rather than fighting with the tools.
+**Rime** is a CMS built on top of **SvelteKit**, designed with a focus on flexibility, ease of configuration, user-friendly administration, and performance. It turns a simple configuration into a schema database, then provides the tools around it:
+
+```text
+configuration -> schema -> database -> API -> admin panel -> your frontend
+```
+
+Rime handles the CMS foundations while leaving the frontend to you. Use the generated API, or build your frontend exactly the way your project needs with **Svelte** and **SvelteKit**.
 
 [resource:pages:installation](/docs/02-installation.md)
 
 ## Why another CMS ?
 
-The main goal of **Rime** is to provide instant access to a flexible admin panel, with all the essential tools to build your project. It has been designed to be as intuitive and easy to use as possible, while still offering the full power of **SvelteKit** and **Svelte**.
+The goal of **Rime** is to provide the Svelte ecosystem a CMS that is powerful enough for serious projects and straightforward for developers to configure and extend. Define your content, manage it through the panel, access it through the API, and decide how the frontend is built and delivered.
 
 Some of its key features include :
 
-- Headless architecture, so you can build your front-end without limitations
-- Automatic API endpoint generation
+- Headless architecture, so you can build your frontend without limitations
+- Schema-driven configuration and automatic API endpoint generation
 - A wide variety of [fields](/docs/05-fields/00-overview.md), including blocks and nested arrays
 - A flexible, intuitive rich-text editor
 - Built-in [i18n](/docs/03-configuration/04-i18n.md) support
 - Version system
-- Great types supports, from your database schema to your front-end
-- Smooth, developer-friendly workflow
+- Great type support, from your database schema to your frontend
+- A smooth, developer-friendly workflow
 
 While some existing tools offer similar features — with varying levels of configuration complexity — none of them truly met my needs without compromise. **Rime** bridges that gap, combining the full power of **SvelteKit** and **Svelte**, while providing all the features a CMS needs.
 
-Also the choices of SQLite database and targeting nodeJS server environments ensure that everything runs on your server — database, files, and app together. No external services, no vendor lock-in, your data stays yours. And deploying is as simple as uploading your code to any hosting provider that supports nodeJS.
+The choice of SQLite and Node.js server environments means your database, files, and app can run together on your server. There are no required external services or vendor lock-in, and your data stays yours. Deploying is as simple as uploading your code to any hosting provider that supports Node.js.

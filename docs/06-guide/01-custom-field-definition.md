@@ -109,4 +109,8 @@ const Pages = Collection.create('pages', {
 });
 ```
 
-Need a hook whose real implementation only makes sense server-side? See [shared hooks with different server and client behavior](/docs/05-fields/00-overview.md#shared-hooks-with-different-server-and-client-behavior) in the fields reference.
+Need a hook whose real implementation only makes sense server-side, or that behaves differently client/server? See [Fields shared methods](/docs/05-fields/00-overview.md#fields-shared-methods) in the fields reference.
+
+## Publishing it as a package
+
+See [Authoring a package](/docs/06-guide/04-authoring-a-package.md).
