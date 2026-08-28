@@ -2,10 +2,10 @@
 
 If you’ve followed the [installation](/docs/02-installation.md) steps correctly, you should already have a `pages` collection and the `$adapter` property set up.
 
-The configuration is the core of **Rime**, this is where you configure how your documents will be structured, localization, panel access, custom API routes and [more](#properties)… The configuration entry **must be located at **`src/lib/+rime/rime.config.ts`. Here is a basic configuration example :
+The configuration is the core of **Rime**, this is where you configure how your documents will be structured, localization, panel access, custom API routes and [more](#properties)… The configuration entry **must be located at** `src/lib/+rime/rime.config.server.ts`. Here is a basic configuration example :
 
 ```ts
-// @file:src/lib/+rime/rime.config.ts
+// @file:src/lib/+rime/rime.config.server.ts
 import { rime, Collection } from '$rime/config';
 import { text } from 'rimecms/fields';
 import { sqliteAdapter } from 'rimecms/adapter-sqlite'
@@ -235,6 +235,31 @@ export default rime({
   }
 });
 ```
+
+### plugins
+
+A plugin runs on both client and server, so if you're writing your own,
+keeping server-only code out of the client bundle is up to you — see
+[$rime/modules](/docs/06-guide/02-isomorphic-modules.md).
+
+```ts
+import { definePlugin } from 'rimecms';
+
+const myPlugin = definePlugin(() => ({
+  name: 'my-plugin',
+  configure: (config) => config, // mutate collections/panel/etc. before the config is built
+  routes: {
+    '/api/my-plugin/ping': { GET: async () => json({ ok: true }) }
+  }
+}));
+
+export default rime({
+  //...
+  plugins: [myPlugin()]
+});
+```
+
+[resource:pages:Writing plugins](/docs/06-guide/03-plugin-authoring.md)
 
 ### custom
 
