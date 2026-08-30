@@ -1,16 +1,18 @@
 node_modules
+dist
+build
+.svelte-kit
+.DS_Store
+Thumbs.db
+*.log
+pnpm-debug.log*
+*.code-workspace
 
-# Output
+# Deploy targets
 .output
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
-/build
-
-# OS
-.DS_Store
-Thumbs.db
 
 # Env
 .env
@@ -18,16 +20,19 @@ Thumbs.db
 !.env.example
 !.env.test
 
-# Rime
-.rime
-.cache
-db
-+rime.generated
-/assets
-/logs
-
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+# rime dev/codegen artifacts
+.rime
+.cache
+db
+logs
++rime.generated
+*.generated.d.ts
+*.tgz
+
+# package-specific
+/assets
 __old
