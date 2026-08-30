@@ -3,7 +3,7 @@
 1. Create a SvelteKit project if not already done :
 
    ```bash
-   npx sv create my-app && cd my-app
+   npx sv create --template minimal --types ts my-app && cd my-app
    ```
 
 2. Install rime :
