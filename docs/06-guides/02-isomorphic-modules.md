@@ -1,6 +1,6 @@
-<!-- Summary: How a package ships one export with a different client and server implementation, via the `$rime/modules` barrel. -->
+<!-- Summary: How to split one export into different client and server implementations, via the `$rime/modules` barrel. -->
 
-A package's `src/lib` runs in two different builds — client and server. `$rime/modules` lets one export resolve to a different file per build, so code needing real server access (a database, a secret) never ships to the browser.
+Some code needs to behave differently on the client and the server — or must never reach the browser at all, because it touches a database or a secret. `$rime/modules` handles that split: write the client-safe version in `module.ts` and the server-only version in `module.server.ts`, then import from `$rime/modules` — it resolves to whichever file matches the current build. This works anywhere in a `src/lib`: a field, a plugin, an app's own code, not just a published package.
 
 ## Different behavior per side
 
