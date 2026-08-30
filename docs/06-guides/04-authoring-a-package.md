@@ -1,6 +1,6 @@
 <!-- Summary: Ship a field or plugin as an installable npm package — scaffold, package.json, build, publish. -->
 
-A field or plugin you build for one app is just local code. Publishing it as a package is what lets any other app install and use it — this walks through scaffolding, configuring, and shipping one. Applies the same way to a [field](/docs/06-guide/01-custom-field-definition.md) or a [plugin](/docs/06-guide/03-plugin-authoring.md).
+A field or plugin you build for one app is just local code. Publishing it as a package is what lets any other app install and use it — this walks through scaffolding, configuring, and shipping one. Applies the same way to a [field](/docs/06-guides/01-custom-field-definition.md) or a [plugin](/docs/06-guides/03-plugin-authoring.md).
 
 1. Scaffold a svelteKit library
 
@@ -27,7 +27,7 @@ export const myThing = definePlugin(() => ({
 }));
 ```
 
-See [Isomorphic modules](/docs/06-guide/02-isomorphic-modules.md), or the actual content for a [field](/docs/06-guide/01-custom-field-definition.md) / [plugin](/docs/06-guide/03-plugin-authoring.md).
+See [Isomorphic modules](/docs/06-guides/02-isomorphic-modules.md), or the actual content for a [field](/docs/06-guides/01-custom-field-definition.md) / [plugin](/docs/06-guides/03-plugin-authoring.md).
 
 3. Edit your `package.json`
 

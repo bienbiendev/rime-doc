@@ -54,6 +54,6 @@ import { callExternalApi } from '$rime/modules';
 - Import by name from `$rime/modules` — never `$rime/modules/my-thing`.
 - Every `module(.server).ts` export name must be unique across the whole package.
 
-[resource:pages:Authoring a package](/docs/06-guide/04-authoring-a-package.md).
+[resource:pages:Authoring a package](/docs/06-guides/04-authoring-a-package.md).
 
-[resource:pages:Plugin authoring](/docs/06-guide/03-plugin-authoring.md).
+[resource:pages:Plugin authoring](/docs/06-guides/03-plugin-authoring.md).

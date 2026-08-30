@@ -295,7 +295,7 @@ import { logSave } from '$rime/modules';
 // this.field.hooks = { beforeSave: [logSave] };
 ```
 
-See [Isomorphic modules](/docs/06-guide/02-isomorphic-modules.md).
+See [Isomorphic modules](/docs/06-guides/02-isomorphic-modules.md).
 
 ### A hook needing different client/server behavior
 
@@ -321,6 +321,6 @@ import { checkUnique } from '$rime/modules';
 // this.field.hooks = { beforeValidate: [checkUnique] };
 ```
 
-See [Isomorphic modules](/docs/06-guide/02-isomorphic-modules.md).
+See [Isomorphic modules](/docs/06-guides/02-isomorphic-modules.md).
 
-See the [custom field definition guide](/docs/06-guide/01-custom-field-definition.md) for a full walkthrough building one.
+See the [custom field definition guide](/docs/06-guides/01-custom-field-definition.md) for a full walkthrough building one.

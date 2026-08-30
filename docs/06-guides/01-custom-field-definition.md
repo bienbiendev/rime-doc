@@ -113,4 +113,4 @@ Need a hook whose real implementation only makes sense server-side, or that beha
 
 ## Publishing it as a package
 
-See [Authoring a package](/docs/06-guide/04-authoring-a-package.md).
+See [Authoring a package](/docs/06-guides/04-authoring-a-package.md).

@@ -59,7 +59,7 @@ You can now visit the `/panel`, in which there will be nothing more than the bas
    // @file:src/hooks.server.ts
    import { sequence } from '@sveltejs/kit/hooks';
    import { handlers } from 'rimecms';
-   import config from './lib/config.generated/rime.config.server.js';
+   import config from './+rime.generated/rime.config.server.js';
 
    export const handle = sequence(...(await handlers(config)));
    ```
@@ -79,7 +79,7 @@ You can now visit the `/panel`, in which there will be nothing more than the bas
    import { defineConfig } from 'drizzle-kit';
 
    export default defineConfig({
-     schema: './src/lib/+rime.generated/schema.server.ts',
+     schema: './src/+rime.generated/schema.server.ts',
      out: './db',
      strict: false,
      dialect: 'sqlite',
@@ -92,7 +92,7 @@ You can now visit the `/panel`, in which there will be nothing more than the bas
 5. Create the rime configuration file :
 
    ```ts
-   // @file:src/lib/+rime/rime.config.ts
+   // @file:src/+rime/rime.config.server.ts
    import { rime, Collection } from '$rime/config';
    import { text } from 'rimecms/fields';
    import { sqliteAdapter } from 'rimecms/adapter-sqlite';
@@ -112,3 +112,7 @@ Then run the project and create your first user as described in the 3rd step, se
 ## Troubleshooting
 
 Currently `yarn` and `deno` are not supported. Installation failed as dependencies are not correctly resolved.
+
+## Config location (RIME_CONFIG_DIR)
+
+By default, your hand-authored config lives at `src/+rime` and generated output at `src/+rime.generated`. Set `RIME_CONFIG_DIR` in `.env` to move it — e.g. `RIME_CONFIG_DIR=src/config` puts it at `src/config`, with generated output following automatically at `src/config.generated`. Then run `npm run rime generate`.

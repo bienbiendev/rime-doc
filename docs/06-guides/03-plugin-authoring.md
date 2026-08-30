@@ -29,7 +29,7 @@ export const myPlugin = definePlugin((options?: { greeting?: string }): Plugin =
 
 2. Export it as an isomorphic module
 
-rimecms plugins are consumed both client and server side. Therefore you must export it as an isomorphic module. See [Isomorphic modules](/docs/06-guide/02-isomorphic-modules.md).
+rimecms plugins are consumed both client and server side. Therefore you must export it as an isomorphic module. See [Isomorphic modules](/docs/06-guides/02-isomorphic-modules.md).
 
 ```ts
 // @file:src/lib/index.ts
@@ -51,7 +51,7 @@ export const myPlugin = definePlugin((): Plugin => ({
 
 3. Ship it
 
-See [Authoring a package](/docs/06-guide/04-authoring-a-package.md).
+See [Authoring a package](/docs/06-guides/04-authoring-a-package.md).
 
 4. Use it
 
