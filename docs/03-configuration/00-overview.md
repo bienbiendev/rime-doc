@@ -238,9 +238,7 @@ export default rime({
 
 ### plugins
 
-A plugin runs on both client and server, so if you're writing your own,
-keeping server-only code out of the client bundle is up to you — see
-[$rime/modules](/docs/06-guides/02-isomorphic-modules.md).
+A plugin runs on both client and server, so if you're writing your own, keeping server-only code out of the client bundle is up to you — see [$rime/modules](/docs/06-guides/02-isomorphic-modules.md).
 
 ```ts
 import { definePlugin } from 'rimecms';

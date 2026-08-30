@@ -207,7 +207,7 @@ By default the `update` prop will use the `data.doc` as the resource to update, 
 </LiveEdit>
 ```
 
-> [!NOTE] This functionality is experimental.
+> [!INFOS] This functionality is experimental.
 
 ### nested
 

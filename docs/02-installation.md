@@ -113,6 +113,6 @@ Then run the project and create your first user as described in the 3rd step, se
 
 Currently `yarn` and `deno` are not supported. Installation failed as dependencies are not correctly resolved.
 
-## Config location (RIME_CONFIG_DIR)
+## Config location
 
 By default, your hand-authored config lives at `src/+rime` and generated output at `src/+rime.generated`. Set `RIME_CONFIG_DIR` in `.env` to move it — e.g. `RIME_CONFIG_DIR=src/config` puts it at `src/config`, with generated output following automatically at `src/config.generated`. Then run `npm run rime generate`.

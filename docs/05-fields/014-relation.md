@@ -18,7 +18,7 @@ Sets the target collection or area slug. This is required.
 
 | Parameter | Type             | Description                               |
 | --------- | ---------------- | ----------------------------------------- |
-| `slug`    | `CollectionSlug` | The slug of the target collection or area |
+| `slug`    | `CollectionSlug` | The slug of the target collection |
 
 ```ts
 const author = relation('author').to('users');

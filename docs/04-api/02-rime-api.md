@@ -103,7 +103,7 @@ await rime.collection('posts').deleteById({ id: '123' });
 
 ### delete
 
-Deletes all documents matching a query. Returns `Promise<string[]>` (deleted ids).
+Deletes documents. Returns `Promise<string[]>` (deleted ids).
 
 | Parameter | Type     | Description              |
 | --------- | -------- | ------------------------ |
@@ -113,6 +113,9 @@ Deletes all documents matching a query. Returns `Promise<string[]>` (deleted ids
 | `offset`  | `number` | Number to skip           |
 
 ```ts
+// Delete all posts
+await rime.collection('posts').delete();
+// Delete documents matching a query.
 await rime.collection('posts').delete({ query: 'where[status][equals]=draft' });
 ```
 

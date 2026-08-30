@@ -19,7 +19,7 @@ The component type:
 ```ts
 Component<{
   path: string;
-  config: ComponentField;
+  config: ComponentFieldBuilder;
   form: DocumentFormContext<GenericDoc>;
 }>;
 ```
